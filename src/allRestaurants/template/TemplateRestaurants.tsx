@@ -1,8 +1,10 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import Modal from "../molecules/Modal"
 import NavBar from "../molecules/NavBar"
 import Restaurants from "../molecules/Restaurants"
 import SelectInput from "../molecules/SelectInput"
+import { DivModal } from "../styled-components"
 
 export interface iGetRestaurants {
     url: string,
@@ -15,6 +17,8 @@ export interface iGetRestaurants {
 
 const TemplateRestaurants = () => {
     const [restaurants, setRestaurants] = useState<iGetRestaurants[]>([])
+    const [findRestaurant, setFindRestaurant] = useState<string>('')
+    const [isModalVisible, setModalVisible] = useState<boolean>(false)
 
     const getRestaurantsApi = async () => {
         const response = await axios.get('https://apigenerator.dronahq.com/api/dstqgR3A/restaurantes')
@@ -28,9 +32,14 @@ const TemplateRestaurants = () => {
 
     return (
         <>
-        <NavBar />
-        <SelectInput />
-        <Restaurants restaurants={restaurants} />
+            <NavBar findRestaurant={findRestaurant} setFindRestaurant={setFindRestaurant} onClick={() => setModalVisible(true)} />
+            {isModalVisible ?
+                <DivModal>
+                    <Modal onClose={() => setModalVisible(false)} />
+                </DivModal> : null
+            }
+            <SelectInput restaurants={restaurants} />
+            <Restaurants restaurants={restaurants} findRestaurant={findRestaurant} />
         </>
     )
 }
