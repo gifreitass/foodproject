@@ -1,4 +1,4 @@
-import { DivRestaurantStyle, ImageRate, ImageRestaurant, TextRestaurantRate } from "../styled-components"
+import { DescribreRestaurant, DivRestaurantStyle, ImageRate, ImageRestaurant, TextRestaurantRate } from "../styled-components"
 import { iGetRestaurants } from "../template/TemplateRestaurants"
 
 const DivRestaurant: React.FC<iGetRestaurants> = (props) => {
@@ -7,7 +7,7 @@ const DivRestaurant: React.FC<iGetRestaurants> = (props) => {
             <div>
                 <ImageRestaurant src={props.url} alt="imagem do restaurante"/>
             </div>
-            <div>
+            <DescribreRestaurant>
                 <h4>{props.nome}</h4>
                 <TextRestaurantRate>
                     <ImageRate src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" />
@@ -16,7 +16,7 @@ const DivRestaurant: React.FC<iGetRestaurants> = (props) => {
                     <p>{props.categoria}</p>
                 </TextRestaurantRate>
                 <p>{props.sobre}</p>
-            </div>
+            </DescribreRestaurant>
         </DivRestaurantStyle>
     )
 }
