@@ -68,7 +68,7 @@ export const RestaurantsMainStyle = styled.main`
     padding: 20px;
     margin: 0px auto;
     align-items: stretch;
-    @media only screen and (max-width: 500px) {
+    @media only screen and (max-width: 665px) {
        display: flex;
        flex-direction: column;
     }
