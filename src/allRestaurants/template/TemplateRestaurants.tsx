@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import Modal from "../molecules/Modal"
 import NavBar from "../molecules/NavBar"
 import Restaurants from "../molecules/Restaurants"
@@ -26,6 +26,14 @@ const TemplateRestaurants = () => {
         console.log(response.data)
     }
 
+    const onChangeCategory = (e: ChangeEvent<HTMLSelectElement>) => {
+        console.log(e.target.value)
+    }
+    const onChangeOrder = (e: ChangeEvent<HTMLSelectElement>) => {
+        console.log(e.target.value)
+    }
+
+
     useEffect(() => {
         getRestaurantsApi()
     }, [])
@@ -37,10 +45,8 @@ const TemplateRestaurants = () => {
                     <Modal onClose={() => setModalVisible(false)} />
                 </DivModal> : null
             }
-
             <NavBar findRestaurant={findRestaurant} setFindRestaurant={setFindRestaurant} onClick={() => setModalVisible(true)} />
-
-            <SelectInput restaurants={restaurants} />
+            <SelectInput restaurants={restaurants} changeCategory={onChangeCategory} changeOrder={onChangeOrder} />
             <Restaurants restaurants={restaurants} findRestaurant={findRestaurant} />
         </>
     )
