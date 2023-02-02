@@ -3,14 +3,14 @@ import styled from "styled-components";
 export const Image = styled.img`
     width: 40px;
     margin: 10px;
-    cursor: pointer
+    cursor: pointer;
 `
 export const DescribreRestaurant = styled.div`
     font-size: 13px;
 `
 
 export const ImageRate = styled.img`
-    width: 20px
+    width: 20px;
 `
 
 export const ImageRestaurant = styled.img`
@@ -22,14 +22,14 @@ export const NavBarStyle = styled.nav`
     min-height: 10vh;
     display: flex;
     justify-content: space-between;
-    align-items: center
+    align-items: center;
 `
 
 export const InputStyle = styled.input`
     border-radius: 5px;
     padding: 10px;
     width: 20vw;
-    background-color: #EEEEEE
+    background-color: #EEEEEE;
 `
 
 export const DivRestaurantStyle = styled.div`
@@ -54,28 +54,34 @@ export const DivRestaurantStyle = styled.div`
     }
 `
 
+export const SectionFilter = styled.div`
+   text-align: center;
+   background-color: #eeeeee;
+   min-height: 5vh;
+`
+
 export const RestaurantsMainStyle = styled.main`
     display: grid;
     grid-template-columns: repeat(2, 2fr);
     grid-gap: 20px;
     width: 80vw;
-    margin: 20px auto;
+    padding: 20px;
+    margin: 0px auto;
     align-items: stretch;
     @media only screen and (max-width: 500px) {
        display: flex;
        flex-direction: column;
     }
-    /* display: flex;
-    justify-content: center;
-    flex-wrap: wrap */
+   
 `
 
 export const DivContainsRestaurants = styled.div`
     text-align: center;
     background-color: #eeeeee;
+    min-height: 85vh;
 `
 
-export const TextRestaurantRate = styled.p`
+export const TextRestaurantRate = styled.div`
     display: flex;
     gap: 5px;
 `
@@ -87,17 +93,17 @@ export const ModalStyle = styled.div`
     border-radius: 10px;
     text-align: center;
     position: absolute;
-    padding: 30px
+    padding: 30px;
 `
 
 export const DivTitleModal = styled.div`
     display: flex;
-    justify-content: space
+    justify-content: space;
 `
 
 export const ModalForm = styled.form`
     display: flex;
-    justify-content: space-evenly
+    justify-content: space-evenly;
 `
 
 export const ModalFormInputs = styled.div`
@@ -106,13 +112,13 @@ export const ModalFormInputs = styled.div`
     justify-content: center;
     align-items: center;
     text-align: left;
-    gap: 10px
+    gap: 10px;
 `
 
 export const TitleModal = styled.p`
     padding: 10px;
     color: white;
-    font-size: 1.5em
+    font-size: 1.5em;
 `
 
 export const ModalInput = styled.input`
@@ -120,7 +126,7 @@ export const ModalInput = styled.input`
     background-color: #EEEEEE;
     border-radius: 5px;
     padding: 5px;
-    border: none
+    border: none;
 `
 
 export const ModalTextArea = styled.textarea`
@@ -128,11 +134,11 @@ export const ModalTextArea = styled.textarea`
     background-color: #EEEEEE;
     border-radius: 5px;
     height: 5vw;
-    width: 15vw
+    width: 15vw;
 `
 
 export const ModalLabel = styled.label`
-    color: white
+    color: white;
 `
 
 export const ModalButton = styled.button`
@@ -152,7 +158,7 @@ export const DivModal = styled.div`
     justify-content: center;
     align-items: center;
     backdrop-filter: blur(2px);
-    background-color: rgba(169, 169, 169, 0.3)
+    background-color: rgba(169, 169, 169, 0.3);
 `
 
 export const ImageModal = styled.img`
@@ -160,10 +166,10 @@ export const ImageModal = styled.img`
     position: absolute;
     right: 10px;
     top: 10px;
-    cursor: pointer
+    cursor: pointer;
 `
 
 export const DivFormik = styled.div`
     font-size: 13px;
-    font-weight: 500
+    font-weight: 500;
 `
