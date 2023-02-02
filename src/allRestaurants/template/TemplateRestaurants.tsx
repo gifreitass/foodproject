@@ -32,12 +32,14 @@ const TemplateRestaurants = () => {
 
     return (
         <>
-            <NavBar findRestaurant={findRestaurant} setFindRestaurant={setFindRestaurant} onClick={() => setModalVisible(true)} />
             {isModalVisible ?
                 <DivModal>
                     <Modal onClose={() => setModalVisible(false)} />
                 </DivModal> : null
             }
+
+            <NavBar findRestaurant={findRestaurant} setFindRestaurant={setFindRestaurant} onClick={() => setModalVisible(true)} />
+
             <SelectInput restaurants={restaurants} />
             <Restaurants restaurants={restaurants} findRestaurant={findRestaurant} />
         </>

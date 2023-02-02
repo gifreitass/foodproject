@@ -7,9 +7,9 @@ const Restaurants: React.FC<{ restaurants: iGetRestaurants[], findRestaurant: st
         <DivContainsRestaurants>
             <h2>Restaurantes</h2>
             <RestaurantsMainStyle>
-                {props.restaurants.map((restaurant) => {
+                {props.restaurants.map((restaurant, index) => {
                     if (restaurant.nome.toLowerCase().includes(props.findRestaurant.toLowerCase())) {
-                        return <DivRestaurant url={restaurant.url} nome={restaurant.nome} categoria={restaurant.categoria} avaliacao={restaurant.avaliacao} sobre={restaurant.sobre} />
+                        return <DivRestaurant key={index} url={restaurant.url} nome={restaurant.nome} categoria={restaurant.categoria} avaliacao={restaurant.avaliacao} sobre={restaurant.sobre} />
                     }
                 })}
             </RestaurantsMainStyle>

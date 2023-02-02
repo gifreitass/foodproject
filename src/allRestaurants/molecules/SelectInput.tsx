@@ -1,13 +1,13 @@
 import { iGetRestaurants } from "../template/TemplateRestaurants"
 
-const SelectInput: React.FC<{restaurants: iGetRestaurants[]}> = (props) => {
+const SelectInput: React.FC<{ restaurants: iGetRestaurants[] }> = (props) => {
     return (
         <div>
             <select>
                 <option value="categorias" selected>Categorias</option>
                 {/* renderizar as options com as categorias dos restaurantes */}
-                {props.restaurants.map((restaurant) => {
-                    return <option value={restaurant.categoria}>{restaurant.categoria}</option>
+                {props.restaurants.map((restaurant, index) => {
+                    return <option key={index} value={restaurant.categoria}>{restaurant.categoria}</option>
                 })}
             </select>
             <select>
