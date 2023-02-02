@@ -17,7 +17,8 @@ const SelectInput: React.FC<{ restaurants: iGetRestaurants[], changeCategory: an
     return (
         <SectionFilter>
             <select defaultValue=" " onChange={props.changeCategory}>
-                <option value="categorias">Categorias</option>
+               
+                <option value="all">Todas as categorias</option>
                 {/* renderizar as options com as categorias dos restaurantes */}
                 {filterCategory.map((item, index) => {
                     return <option key={index} value={item}>{item}</option>
