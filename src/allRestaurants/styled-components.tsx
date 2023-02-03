@@ -14,7 +14,7 @@ export const ImageRate = styled.img`
 `
 
 export const ImageRestaurant = styled.img`
-    width: 60px;
+    width: 80px;
 `
 
 export const NavBarStyle = styled.nav`
@@ -72,7 +72,6 @@ export const RestaurantsMainStyle = styled.main`
        display: flex;
        flex-direction: column;
     }
-   
 `
 
 export const DivContainsRestaurants = styled.div`

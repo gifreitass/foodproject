@@ -1,6 +1,6 @@
 import TemplateRestaurants from "../allRestaurants/template/TemplateRestaurants"
 
-const PageAllRestaurants = () => {
+const PageAllRestaurants: React.FC<{}> = () => {
     return (
         <TemplateRestaurants />
     )
