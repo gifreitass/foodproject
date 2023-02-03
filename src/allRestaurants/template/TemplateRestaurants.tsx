@@ -5,6 +5,8 @@ import NavBar from "../molecules/NavBar"
 import Restaurants from "../molecules/Restaurants"
 import SelectInput from "../molecules/SelectInput"
 import { DivModal } from "../styled-components"
+import { useContext } from "react"
+import { GetRestaurantsContext } from "../context/GetRestaurantsContext"
 
 export interface iGetRestaurants {
     url: string,
@@ -15,8 +17,10 @@ export interface iGetRestaurants {
     id?: number
 }
 
-const TemplateRestaurants = () => {
-    const [restaurants, setRestaurants] = useState<iGetRestaurants[]>([])
+const TemplateRestaurants: React.FC = () => {
+    const { restaurants, setRestaurants } = useContext(GetRestaurantsContext)
+    console.log(restaurants)
+
     const [findRestaurant, setFindRestaurant] = useState<string>('')
     const [isModalVisible, setModalVisible] = useState<boolean>(false)
     const [filterCategory, setFilterCategory] = useState<string>('')
@@ -24,7 +28,6 @@ const TemplateRestaurants = () => {
     const getRestaurantsApi = async () => {
         const response = await axios.get('https://apigenerator.dronahq.com/api/dstqgR3A/restaurantes')
         setRestaurants(response.data)
-        console.log(response.data)
     }
 
     const onChangeCategory = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -33,7 +36,6 @@ const TemplateRestaurants = () => {
     const onChangeOrder = (e: ChangeEvent<HTMLSelectElement>) => {
         console.log(e.target.value)
     }
-
 
     useEffect(() => {
         getRestaurantsApi()
