@@ -7,6 +7,7 @@ import GetRestaurantsProvider from './allRestaurants/context/GetRestaurantsConte
 import TemplateProducts from './mcDonalds/templates/TemplateProducts'
 import PageAllRestaurants from './pages/PageAllRestaurants'
 import PageOrders from './pages/PageOrders'
+import RouteManager from './routes/RouteManager'
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -17,17 +18,15 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+//const testeRoute = ['Rota1', 'Rota2', "Rota3"]
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <GetRestaurantsProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<PageAllRestaurants />} />
-        <Route path='/pedido' element={<PageOrders />} />
-        <Route path='/mcdonalds' element={<TemplateProducts />} />
-      </Routes>
-      <GlobalStyle />
-    </BrowserRouter>
+      <BrowserRouter>
+        <RouteManager />
+        <GlobalStyle />
+      </BrowserRouter>
     </GetRestaurantsProvider>
   </React.StrictMode>
 )
