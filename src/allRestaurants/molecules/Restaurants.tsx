@@ -9,7 +9,7 @@ const Restaurants: React.FC<{ restaurants: iGetRestaurants[], findRestaurant: st
         <DivContainsRestaurants>
             <h2>Restaurantes</h2>
             <RestaurantsMainStyle>
-                {props.restaurants.map((restaurant, index) => {
+                {props.restaurants.map((restaurant) => {
 
                     if (
                         (props.filterCategory.toLowerCase() == "all"
@@ -21,7 +21,7 @@ const Restaurants: React.FC<{ restaurants: iGetRestaurants[], findRestaurant: st
                     ) {
                         return (
                             <Link to={"/" + restaurant.id}>
-                                <DivRestaurant key={index} url={restaurant.url} nome={restaurant.nome} categoria={restaurant.categoria} avaliacao={restaurant.avaliacao} sobre={restaurant.sobre} />
+                                <DivRestaurant key={restaurant.id} id={restaurant.id} url={restaurant.url} nome={restaurant.nome} categoria={restaurant.categoria} avaliacao={restaurant.avaliacao} sobre={restaurant.sobre} />
                             </Link>
                         )
                     }

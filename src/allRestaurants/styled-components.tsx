@@ -44,7 +44,7 @@ export const DivRestaurantStyle = styled.div`
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     transition: 0.3s;
     cursor: pointer;
-
+    color: black;
     &:hover {
         box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     }
@@ -68,6 +68,9 @@ export const RestaurantsMainStyle = styled.main`
     padding: 20px;
     margin: 0px auto;
     align-items: stretch;
+    &>a{
+        text-decoration: none;
+    }
     @media only screen and (max-width: 665px) {
        display: flex;
        flex-direction: column;
@@ -78,6 +81,7 @@ export const DivContainsRestaurants = styled.div`
     text-align: center;
     background-color: #eeeeee;
     min-height: 85vh;
+    
 `
 
 export const TextRestaurantRate = styled.div`
