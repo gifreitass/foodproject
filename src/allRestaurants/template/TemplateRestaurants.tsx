@@ -24,22 +24,12 @@ const TemplateRestaurants: React.FC = () => {
     const [findRestaurant, setFindRestaurant] = useState<string>('')
     const [isModalVisible, setModalVisible] = useState<boolean>(false)
     const [filterCategory, setFilterCategory] = useState<string>('')
-
-    const getRestaurantsApi = async () => {
-        const response = await axios.get('https://apigenerator.dronahq.com/api/dstqgR3A/restaurantes')
-        setRestaurants(response.data)
-    }
-
     const onChangeCategory = (e: ChangeEvent<HTMLSelectElement>) => {
         setFilterCategory(e.target.value)
     }
     const onChangeOrder = (e: ChangeEvent<HTMLSelectElement>) => {
         console.log(e.target.value)
     }
-
-    useEffect(() => {
-        getRestaurantsApi()
-    }, [])
 
     return (
         <>
