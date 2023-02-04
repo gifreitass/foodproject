@@ -4,6 +4,7 @@ import NavBarMc from "../molecules/NavBarMc"
 import TitleRestaurant from "../molecules/TitleRestaurant"
 import axios from "axios"
 import { MainProducts } from "../styled.components"
+import { iGetRestaurants } from "../../allRestaurants/template/TemplateRestaurants"
 
 export interface iGetProducts {
     idRestaurante?: number,
@@ -15,7 +16,7 @@ export interface iGetProducts {
     descricao: string
 }
 
-const TemplateProducts = () => {
+const TemplateProducts: React.FC<{restaurant: iGetRestaurants}> = (props) => {
     const [products, setProducts] = useState<iGetProducts[]>([])
 
     const getProductsApi = async () => {
@@ -30,7 +31,7 @@ const TemplateProducts = () => {
     return (
         <MainProducts>
             <NavBarMc />
-            <TitleRestaurant />
+            <TitleRestaurant restaurant={props.restaurant} />
             <AllProducts products={products} />
         </MainProducts>
     )
