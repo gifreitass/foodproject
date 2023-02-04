@@ -14,7 +14,7 @@ export interface iGetRestaurants {
     categoria: string,
     avaliacao: number,
     sobre: string,
-    id?: number
+    id: number | string,
 }
 
 const TemplateRestaurants: React.FC = () => {
