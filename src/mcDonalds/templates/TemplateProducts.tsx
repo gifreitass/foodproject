@@ -10,7 +10,7 @@ export interface iGetProducts {
     nome: string,
     url: string,
     valor: number,
-    promocao: boolean,
+    promocao: string,
     valorPromocional: number,
     descricao: string
 }
