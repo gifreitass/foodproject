@@ -3,12 +3,11 @@ import { SectionFilter } from "../styled-components"
 import { iGetRestaurants } from "../template/TemplateRestaurants"
 
 const SelectInput: React.FC<{ restaurants: iGetRestaurants[], changeCategory: any, changeOrder: any }> = (props) => {
-    const [filterCategory, setFilterCategory] = useState([])
+    const [filterCategory, setFilterCategory] = useState<string[]>([])
 
     //Remove as categorias iguais dentro do objeto
     useEffect(() => {
         props.restaurants.map((restaurant) => {
-            //@ts-ignore ---> Ver com o luiz o erro abaixo -- remova o ts ignore para ver o erro
             setFilterCategory(filterCategory => [...filterCategory, restaurant.categoria])
         })
         setFilterCategory(filterCategory => [...new Set(filterCategory)])

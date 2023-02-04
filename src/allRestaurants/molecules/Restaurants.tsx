@@ -11,12 +11,6 @@ const Restaurants: React.FC<{ restaurants: iGetRestaurants[], findRestaurant: st
             <RestaurantsMainStyle>
                 {props.restaurants.map((restaurant, index) => {
 
-                    /* var routeFormated = restaurant.nome.replace(/\s/g, '').replace(/(?<!^)\'(?!$)/, '').toLowerCase().split("-") 
-                        <Link to={routeFormated[0]}>
-                            [...]
-                        </Link> 
-                    */
-
                     if (
                         (props.filterCategory.toLowerCase() == "all"
                             ? true
@@ -26,7 +20,9 @@ const Restaurants: React.FC<{ restaurants: iGetRestaurants[], findRestaurant: st
                         restaurant.nome.toLowerCase().includes(props.findRestaurant.toLowerCase())
                     ) {
                         return (
-                            <DivRestaurant key={index} url={restaurant.url} nome={restaurant.nome} categoria={restaurant.categoria} avaliacao={restaurant.avaliacao} sobre={restaurant.sobre} />
+                            <Link to={"/" + restaurant.id}>
+                                <DivRestaurant key={index} url={restaurant.url} nome={restaurant.nome} categoria={restaurant.categoria} avaliacao={restaurant.avaliacao} sobre={restaurant.sobre} />
+                            </Link>
                         )
                     }
                 })}

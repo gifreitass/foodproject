@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ReactDOM from 'react-dom/client'
 import { Route, Routes } from 'react-router'
 import { BrowserRouter } from 'react-router-dom'
@@ -7,7 +7,6 @@ import GetRestaurantsProvider from './allRestaurants/context/GetRestaurantsConte
 import TemplateProducts from './mcDonalds/templates/TemplateProducts'
 import PageAllRestaurants from './pages/PageAllRestaurants'
 import PageOrders from './pages/PageOrders'
-import RouteManager from './routes/RouteManager'
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -18,13 +17,16 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-//const testeRoute = ['Rota1', 'Rota2', "Rota3"]
-
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <GetRestaurantsProvider>
       <BrowserRouter>
-        <RouteManager />
+        <Routes>
+          <Route path='/' element={<PageAllRestaurants />} />
+          <Route path='/pedido' element={<PageOrders />} />
+          <Route path='/:id' element={<TemplateProducts />} />
+          <Route path='*' element={<h1>Not Found 404</h1>} />
+        </Routes>
         <GlobalStyle />
       </BrowserRouter>
     </GetRestaurantsProvider>
