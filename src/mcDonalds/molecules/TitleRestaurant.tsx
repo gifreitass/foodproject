@@ -3,12 +3,15 @@ import { GetRestaurantsContext } from "../../allRestaurants/context/GetRestauran
 
 const TitleRestaurant = () => {
     const { restaurants } = useContext(GetRestaurantsContext)
+    console.log(restaurants)
 
     return (
         <div>
-            {restaurants.map((restaurant) => {
+            {restaurants.map((restaurant, index) => {
                 if (restaurant.id === 1){
-                    return <img src={restaurant.url} alt="logo do restaurante"/>
+                    return <div>
+                     <img key={`titleRestaurant-itemImage${index}`} src={restaurant.url} alt="logo do restaurante"/>
+                     </div>
                 }
             })}
         </div>
