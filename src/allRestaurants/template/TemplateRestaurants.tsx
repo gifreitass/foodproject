@@ -19,16 +19,25 @@ export interface iGetRestaurants {
 
 const TemplateRestaurants: React.FC = () => {
     const { restaurants, setRestaurants } = useContext(GetRestaurantsContext)
-    console.log(restaurants)
 
     const [findRestaurant, setFindRestaurant] = useState<string>('')
     const [isModalVisible, setModalVisible] = useState<boolean>(false)
     const [filterCategory, setFilterCategory] = useState<string>('')
+    const [filterOrder, setFilterOrder] = useState<string>('')
+
     const onChangeCategory = (e: ChangeEvent<HTMLSelectElement>) => {
         setFilterCategory(e.target.value)
     }
+
     const onChangeOrder = (e: ChangeEvent<HTMLSelectElement>) => {
-        console.log(e.target.value)
+        setFilterOrder(e.target.value)
+        if (filterOrder == "crescente") {
+            setRestaurants(restaurants.sort((a: iGetRestaurants, b: iGetRestaurants) => b.avaliacao - a.avaliacao))
+        } else if (filterOrder == "decrescente") {
+            setRestaurants(restaurants.sort((a: iGetRestaurants, b: iGetRestaurants) => a.avaliacao - b.avaliacao))
+        } else (
+            null
+        )
     }
 
     return (
