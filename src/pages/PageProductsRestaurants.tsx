@@ -10,6 +10,7 @@ const PageProductsRestaurants: React.FC<{}> = () => {
     const { id } = useParams()
     const { restaurants } = useContext(GetRestaurantsContext)
 
+
     const [products, setProducts] = useState()
     const [error, setError] = useState(false)
 

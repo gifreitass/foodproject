@@ -23,6 +23,8 @@ function GetRestaurantsProvider (props: any) {
         getRestaurantsApi()
     }, [])
 
+    console.log({ aRestaurante: restaurants}) 
+
     return (
         <GetRestaurantsContext.Provider value={{restaurants, setRestaurants}}>
             {props.children}
