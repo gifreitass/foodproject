@@ -1,21 +1,13 @@
-import axios from "axios"
-import { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent, useState } from "react"
 import Modal from "../molecules/Modal"
 import NavBar from "../molecules/NavBar"
 import Restaurants from "../molecules/Restaurants"
 import SelectInput from "../molecules/SelectInput"
 import { DivModal } from "../styled-components"
 import { useContext } from "react"
-import { GetRestaurantsContext } from "../context/GetRestaurantsContext"
+import { GetRestaurantsContext } from "../../context/GetRestaurantsContext"
+import { iGetRestaurants } from "../../interfaces/Interfaces"
 
-export interface iGetRestaurants {
-    url: string,
-    nome: string,
-    categoria: string,
-    avaliacao: number,
-    sobre: string,
-    id: number | string,
-}
 
 const TemplateRestaurants: React.FC = () => {
     const { restaurants, setRestaurants } = useContext(GetRestaurantsContext)
