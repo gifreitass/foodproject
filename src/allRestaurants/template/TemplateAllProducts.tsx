@@ -1,9 +1,7 @@
-import { iGetProducts } from "../../mcDonalds/templates/TemplateProducts"
-import { iGetRestaurants } from "./TemplateRestaurants"
+import { iGetRestaurants } from "../../interfaces/Interfaces"
 
-const TemplateAllProducts: React.FC<{ restaurant: iGetRestaurants, products: iGetProducts }> = (props) => {
+const TemplateAllProducts: React.FC<{ restaurant: iGetRestaurants}> = (props) => {
     console.log(props.restaurant)
-    console.log(props.products)
 
     return (
         <>
