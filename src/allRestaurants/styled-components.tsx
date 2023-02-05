@@ -6,7 +6,7 @@ export const Image = styled.img`
     cursor: pointer;
 `
 export const DescribreRestaurant = styled.div`
-    font-size: 13px;
+    font-size: 15px;
 `
 
 export const ImageRate = styled.img`
@@ -30,6 +30,14 @@ export const InputStyle = styled.input`
     padding: 10px;
     width: 20vw;
     background-color: #EEEEEE;
+`
+
+export const SelectInputStyle = styled.select`
+    font-size: 15px;
+    margin: 15px;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer
 `
 
 export const DivRestaurantStyle = styled.div`
