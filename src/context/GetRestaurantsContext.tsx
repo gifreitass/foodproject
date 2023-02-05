@@ -1,32 +1,34 @@
 import React, { createContext, useEffect, useState } from "react"
-import { iGetRestaurants } from "../template/TemplateRestaurants"
 import axios from "axios"
+import { iGetRestaurants } from "../interfaces/Interfaces"
 
 interface IContext {
     restaurants: iGetRestaurants[],
-    setRestaurants: React.Dispatch<React.SetStateAction<iGetRestaurants[]>>
+    setRestaurants: React.Dispatch<React.SetStateAction<iGetRestaurants[]>>,
+    errorRequest?: boolean
 }
 
-export const GetRestaurantsContext = createContext<IContext>({restaurants: [], setRestaurants: () => {}})
+export const GetRestaurantsContext = createContext<IContext>({ restaurants: [], setRestaurants: () => { } })
 
-function GetRestaurantsProvider (props: any) {
+function GetRestaurantsProvider(props: any) {
     const [restaurants, setRestaurants] = useState<iGetRestaurants[]>([])
-    
+    const [errorRequest, setErrorRequest] = useState(false)
+
 
     const getRestaurantsApi = async () => {
         const response = await axios.get('https://apigenerator.dronahq.com/api/dstqgR3A/restaurantes')
         setRestaurants(response.data)
     }
 
-
     useEffect(() => {
-        getRestaurantsApi()
+        setErrorRequest(false)
+        getRestaurantsApi().catch(() => setErrorRequest(true))
     }, [])
 
     console.log({ aRestaurante: restaurants}) 
 
     return (
-        <GetRestaurantsContext.Provider value={{restaurants, setRestaurants}}>
+        <GetRestaurantsContext.Provider value={{ restaurants, errorRequest, setRestaurants }}>
             {props.children}
         </GetRestaurantsContext.Provider>
     )

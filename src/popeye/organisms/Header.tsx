@@ -13,7 +13,7 @@ const HeaderSection = styled.header`
 `;
 
 
-const Header = (props: any) => {
+const Header = () => {
 
   return (
     <HeaderSection>
