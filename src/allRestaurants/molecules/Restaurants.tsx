@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom"
+import { iGetRestaurants } from "../../interfaces/Interfaces"
 import DivRestaurant from "../atoms/DivRestaurant"
 import { DivContainsRestaurants, RestaurantsMainStyle } from "../styled-components"
-import { iGetRestaurants } from "../template/TemplateRestaurants"
 
 const Restaurants: React.FC<{ restaurants: iGetRestaurants[], findRestaurant: string, filterCategory: string }> = (props) => {
-
+    console.log("restaurants", props.restaurants)
     return (
         <DivContainsRestaurants>
             <h2>Restaurantes</h2>
@@ -20,7 +20,7 @@ const Restaurants: React.FC<{ restaurants: iGetRestaurants[], findRestaurant: st
                         restaurant.nome.toLowerCase().includes(props.findRestaurant.toLowerCase())
                     ) {
                         return (
-                            <Link to={"/" + restaurant.id}>
+                            <Link key={`restaurant-item${restaurant.id}`} to={"/" + restaurant.id}>
                                 <DivRestaurant key={restaurant.id} id={restaurant.id} url={restaurant.url} nome={restaurant.nome} categoria={restaurant.categoria} avaliacao={restaurant.avaliacao} sobre={restaurant.sobre} />
                             </Link>
                         )

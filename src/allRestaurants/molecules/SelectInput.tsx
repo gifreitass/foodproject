@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
+import { iGetRestaurants } from "../../interfaces/Interfaces"
 import { SectionFilter } from "../styled-components"
-import { iGetRestaurants } from "../template/TemplateRestaurants"
 
 const SelectInput: React.FC<{ restaurants: iGetRestaurants[], changeCategory: any, changeOrder: any }> = (props) => {
     const [filterCategory, setFilterCategory] = useState<string[]>([])

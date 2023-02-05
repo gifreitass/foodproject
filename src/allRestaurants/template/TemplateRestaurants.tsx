@@ -15,18 +15,19 @@ const TemplateRestaurants: React.FC = () => {
     const [findRestaurant, setFindRestaurant] = useState<string>('')
     const [isModalVisible, setModalVisible] = useState<boolean>(false)
     const [filterCategory, setFilterCategory] = useState<string>('')
-    const [filterOrder, setFilterOrder] = useState<string>('')
 
     const onChangeCategory = (e: ChangeEvent<HTMLSelectElement>) => {
         setFilterCategory(e.target.value)
     }
 
     const onChangeOrder = (e: ChangeEvent<HTMLSelectElement>) => {
-        setFilterOrder(e.target.value)
-        if (filterOrder == "crescente") {
-            setRestaurants(restaurants.sort((a: iGetRestaurants, b: iGetRestaurants) => b.avaliacao - a.avaliacao))
-        } else if (filterOrder == "decrescente") {
-            setRestaurants(restaurants.sort((a: iGetRestaurants, b: iGetRestaurants) => a.avaliacao - b.avaliacao))
+        const selectedFilter = e.target.value
+        const newRestaurants = Array.from(restaurants)
+
+        if (selectedFilter == "crescente") {
+            setRestaurants(newRestaurants.sort((a: iGetRestaurants, b: iGetRestaurants) => a.avaliacao - b.avaliacao))
+        } else if (selectedFilter == "decrescente") {
+            setRestaurants(newRestaurants.sort((a: iGetRestaurants, b: iGetRestaurants) => b.avaliacao - a.avaliacao))
         } else (
             null
         )

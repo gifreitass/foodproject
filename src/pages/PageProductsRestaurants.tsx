@@ -10,7 +10,6 @@ const PageProductsRestaurants: React.FC<{}> = () => {
     const { id } = useParams()
     const { restaurants, errorRequest } = useContext(GetRestaurantsContext)
 
-
     const currentRestaurant = restaurants.find((restaurant) => restaurant.id === Number(id))
 
     console.log("error request", errorRequest)

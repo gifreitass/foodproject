@@ -25,6 +25,8 @@ function GetRestaurantsProvider(props: any) {
         getRestaurantsApi().catch(() => setErrorRequest(true))
     }, [])
 
+    console.log({ aRestaurante: restaurants}) 
+
     return (
         <GetRestaurantsContext.Provider value={{ restaurants, errorRequest, setRestaurants }}>
             {props.children}
