@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
+import { iGetRestaurants } from "../../interfaces/Interfaces"
 import DivRestaurant from "../atoms/DivRestaurant"
 import { DivContainsRestaurants, RestaurantsMainStyle } from "../styled-components"
-import { iGetRestaurants } from "../template/TemplateRestaurants"
 
 const Restaurants: React.FC<{ restaurants: iGetRestaurants[], findRestaurant: string, filterCategory: string }> = (props) => {
     console.log("restaurants", props.restaurants)
