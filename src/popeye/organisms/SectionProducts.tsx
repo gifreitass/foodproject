@@ -9,14 +9,19 @@ const GridProducts = styled.div`
     width: 80%;
     margin: 20px auto;
     align-items: stretch;
+    
+    @media only screen and (max-width: 830px) {
+       display: flex;
+       flex-direction: column;
+    }
 `
 
-const SectionProducts: React.FC<{ products: iGetProducts[] }> = (props) => {
-
+const SectionProducts: React.FC<{ products: iGetProducts[], action: any }> = (props) => {
+    
     return (
         <GridProducts>
             {props.products.map(product => {
-                return <CardProduct key={product.id} product={product} />
+                return <CardProduct key={product.id} product={product} action={props.action}/>
             })}
         </GridProducts>
     )

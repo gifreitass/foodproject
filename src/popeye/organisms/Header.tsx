@@ -8,16 +8,23 @@ const HeaderSection = styled.header`
   align-items: center;
   background-color: #F4A460;
   color: black;
-  min-height: 10vh;
+  height: 10vh;
   padding: 10px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  @media only screen and (max-width: 460px) {
+    height: 30vh;
+  }
 `;
 
 
-const Header = () => {
+const Header = (props: any) => {
 
   return (
     <HeaderSection>
-      <NavBar />
+      <NavBar action={props.action} />
     </HeaderSection>
   );
 };

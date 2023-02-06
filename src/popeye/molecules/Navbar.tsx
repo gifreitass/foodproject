@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const NavBar = () => {
+const NavBar = (props:any) => {
   const Nav = styled.nav`
     display: flex;
     align-items: center;
@@ -27,7 +27,7 @@ const NavBar = () => {
       align-items: center;
       color: black;
       text-decoration: none;
-      
+     
 
     & > a {
       display: flex;
@@ -58,7 +58,7 @@ const NavBar = () => {
           <Link to='/pedidos'>
             <img height={40} src="https://cdn-icons-png.flaticon.com/512/2704/2704832.png" />
           </Link>
-          <Link to='#'>
+          <Link to='#' onClick={props.action}>
             <img height={40} src="https://cdn-icons-png.flaticon.com/512/4175/4175270.png" />
           </Link>
         </Li>
