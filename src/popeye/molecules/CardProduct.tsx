@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { iGetProducts } from "../../interfaces/Interfaces"
 import { Pedidos } from "../template/TemplatePopeye";
@@ -39,14 +39,29 @@ const ButtonAddCart = styled.button`
     cursor: pointer;
 `
 
-const CardProduct: React.FC<{ product: iGetProducts, action: any }> = (props) => {
+
+
+const teste = [
+    {"nome":"teste1","valor":"25", "descricao":"teste1"},
+    {"nome":"teste2","valor":"20", "descricao":"teste2"},
+    {"nome":"teste3","valor":"15", "descricao":"teste3"},
+    {"nome":"teste4","valor":"10", "descricao":"teste4"},
+    {"nome":"teste5","valor":"5", "descricao":"teste5"},
+    {"nome":"teste6","valor":"2", "descricao":"teste6"},
+
+]
+
+const CardProduct: React.FC<{ product: iGetProducts, action:any }> = (props) => {
 
     const [countProduct, setCountProduct] = useState(0)
-    const pedido: Pedidos = {}
+    var pedido: Pedidos = new Object();
+    var qtd = 0
+
 
     function addCart() {
         setCountProduct(countProduct + 1)
-
+        qtd = countProduct + 1
+        
         pedido.nome = props.product.nome
         pedido.idRestaurante = props.product.idRestaurante
         pedido.id = props.product.id
@@ -56,10 +71,11 @@ const CardProduct: React.FC<{ product: iGetProducts, action: any }> = (props) =>
         } else {
             pedido.valor = props.product.valor
         }
-        pedido.qtd = countProduct
+        pedido.qtd = qtd
 
         props.action(pedido)
     }
+
 
     const DivPrices = styled.div`
         &>:first-child {
@@ -83,6 +99,7 @@ const CardProduct: React.FC<{ product: iGetProducts, action: any }> = (props) =>
                 <ButtonAddCart onClick={addCart}>
                     <img height={30} src="https://cdn-icons-png.flaticon.com/512/992/992651.png" alt="" /> {countProduct}
                 </ButtonAddCart>
+
             </div>
             <div>
                 <img width={200} src={props.product.url} alt="" />

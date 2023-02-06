@@ -25,12 +25,16 @@ const Main = styled.main`
     }
 `
 
-
 const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
-    const [products, setProducts] = useState<iGetProducts[]>([])
-    const [errorProducts, setErrorProducts] = useState<boolean>(false)
-    const [viewModal, setViewModal] = useState<boolean>(false)
     const [listOrder, setListOrder] = useState<Array<Pedidos>>([])
+    const [products, setProducts] = useState<iGetProducts[]>([])
+    const [viewModal, setViewModal] = useState<boolean>(false)
+    const [errorProducts, setErrorProducts] = useState<boolean>(false)
+
+    useEffect(() => {
+        setErrorProducts(false)
+        getProductRestaurantApi().catch(() => setErrorProducts(true))
+    }, [])
 
     const getProductRestaurantApi = async () => {
         const response = await axios.get('https://apigenerator.dronahq.com/api/3yNrDssc/produtos')
@@ -38,17 +42,24 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     }
 
     const addOrderCart = (pedido: Pedidos) => {
-        setListOrder(listOrder => [...listOrder, pedido])
+        removerPorId(listOrder, pedido.id)
+        setListOrder([...listOrder, pedido])
+    }
+
+    //Fonte: https://pt.stackoverflow.com/questions/209702/como-excluir-um-item-de-um-array-pelo-valor-do-atributo
+    const removerPorId = (array: Array<Pedidos>, id: any) => {
+        var result = array.filter(function (el) {
+            return el.id == id;
+        });
+        for (var elemento of result) {
+            var index = array.indexOf(elemento);
+            array.splice(index, 1);
+        }
     }
 
     const onModal = () => {
         setViewModal(!viewModal)
     }
-
-    useEffect(() => {
-        setErrorProducts(false)
-        getProductRestaurantApi().catch(() => setErrorProducts(true))
-    }, [])
 
     return (
         <>
