@@ -3,8 +3,9 @@ import AllProducts from "../molecules/AllProducts"
 import NavBarMc from "../molecules/NavBarMc"
 import TitleRestaurant from "../molecules/TitleRestaurant"
 import axios from "axios"
-import { MainProducts } from "../styled.components"
-import { iGetRestaurants } from "../../allRestaurants/template/TemplateRestaurants"
+import { DivModalShoppingCart, MainProducts } from "../styled-components"
+import { iGetRestaurants } from "../../interfaces/Interfaces"
+import ModalShoppingCart from "../molecules/ModalShoppingCart"
 
 export interface iGetProducts {
     idRestaurante?: number,
@@ -16,8 +17,9 @@ export interface iGetProducts {
     descricao: string
 }
 
-const TemplateProducts: React.FC<{restaurant: iGetRestaurants}> = (props) => {
+const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     const [products, setProducts] = useState<iGetProducts[]>([])
+    const [isModalVisible, setModalVisible] = useState<boolean>(false)
 
     const getProductsApi = async () => {
         const response = await axios.get('https://apigenerator.dronahq.com/api/3yNrDssc/produtos')
@@ -29,11 +31,18 @@ const TemplateProducts: React.FC<{restaurant: iGetRestaurants}> = (props) => {
     }, [])
 
     return (
-        <MainProducts>
-            <NavBarMc />
-            <TitleRestaurant restaurant={props.restaurant} />
-            <AllProducts products={products} />
-        </MainProducts>
+        <>
+            <MainProducts>
+                <NavBarMc onClick={() => setModalVisible(true)} />
+                {isModalVisible ?
+                    <DivModalShoppingCart>
+                        <ModalShoppingCart restaurant={props.restaurant} products={products} onClose={() => setModalVisible(false)} />
+                    </DivModalShoppingCart> : null
+                }
+                <TitleRestaurant restaurant={props.restaurant} />
+                <AllProducts products={products} />
+            </MainProducts>
+        </>
     )
 }
 

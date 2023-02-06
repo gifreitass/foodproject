@@ -1,5 +1,5 @@
 import DivProducts from "../atoms/DivProduct"
-import { AllProductsStyle, DivContainsAllProducts } from "../styled.components"
+import { AllProductsStyle, DivContainsAllProducts } from "../styled-components"
 import { iGetProducts } from "../templates/TemplateProducts"
 
 const AllProducts: React.FC<{ products: iGetProducts[] }> = (props) => {

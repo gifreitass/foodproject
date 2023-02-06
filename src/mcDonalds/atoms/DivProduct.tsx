@@ -1,4 +1,4 @@
-import { DivAddProduct, DivImageProduct, DivPriceProduct, DivProductStyle, DivTextProduct, ImageAddProduct, ImageProduct, PriceAndStock } from "../styled.components"
+import { DivAddProduct, DivImageProduct, DivPriceProduct, DivProductStyle, DivTextProduct, ImageAddProduct, ImageProduct, PriceAndStock } from "../styled-components"
 import { iGetProducts } from "../templates/TemplateProducts"
 
 const DivProducts: React.FC<iGetProducts> = (props) => {
