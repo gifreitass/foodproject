@@ -1,10 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { iGetProducts } from "../../interfaces/Interfaces"
+import { Pedidos } from "../template/TemplatePopeye";
 
 const Card = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -14,14 +15,20 @@ const Card = styled.div`
     width: 100%;
     border-radius: 20px;
     gap: 10px;
+
     &:hover {
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
         height: 100%;
     }
+      
+    @media only screen and (max-width: 600px) {
+       flex-direction: column;
+       
+    }
 `;
 
 
-const ButtonAddChart = styled.button`
+const ButtonAddCart = styled.button`
     float: right;
     display: flex;
     align-items: center;
@@ -32,15 +39,27 @@ const ButtonAddChart = styled.button`
     cursor: pointer;
 `
 
-
-const CardProduct: React.FC<{ product: iGetProducts }> = (props) => {
+const CardProduct: React.FC<{ product: iGetProducts, action: any }> = (props) => {
 
     const [countProduct, setCountProduct] = useState(0)
+    const pedido: Pedidos = {}
 
-    function addChart() {
+    function addCart() {
         setCountProduct(countProduct + 1)
-    }
 
+        pedido.nome = props.product.nome
+        pedido.idRestaurante = props.product.idRestaurante
+        pedido.id = props.product.id
+        pedido.descricao = props.product.descricao
+        if (!(props.product.promocao != "true")) {
+            pedido.valor = props.product.valorPromocional
+        } else {
+            pedido.valor = props.product.valor
+        }
+        pedido.qtd = countProduct
+
+        props.action(pedido)
+    }
 
     const DivPrices = styled.div`
         &>:first-child {
@@ -51,20 +70,19 @@ const CardProduct: React.FC<{ product: iGetProducts }> = (props) => {
     `;
 
     return (
-        <Card>
+        <Card id={props.product.idRestaurante + "_" + props.product.id}>
             <div>
                 <div>
-                    <h1>{props.product.nome}</h1>
+                    <h2>{props.product.nome}</h2>
                     <p>{props.product.descricao}</p>
                     <DivPrices>
                         <h3>R${props.product.valor}</h3>
                         {!(props.product.promocao != "true") ? <h3>R${props.product.valorPromocional}</h3> : null}
                     </DivPrices>
                 </div>
-                <ButtonAddChart onClick={addChart}>
+                <ButtonAddCart onClick={addCart}>
                     <img height={30} src="https://cdn-icons-png.flaticon.com/512/992/992651.png" alt="" /> {countProduct}
-                </ButtonAddChart>
-
+                </ButtonAddCart>
             </div>
             <div>
                 <img width={200} src={props.product.url} alt="" />

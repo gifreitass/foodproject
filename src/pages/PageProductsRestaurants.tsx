@@ -11,10 +11,7 @@ const PageProductsRestaurants: React.FC<{}> = () => {
     const { restaurants, errorRequest } = useContext(GetRestaurantsContext)
 
     const currentRestaurant = restaurants.find((restaurant) => restaurant.id === Number(id))
-
-    console.log("error request", errorRequest)
-    console.log("current restaurant", currentRestaurant)
-
+    
     if (id) {
         if (parseInt(id) == 1 && currentRestaurant) {
             return (
