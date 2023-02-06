@@ -24,7 +24,7 @@ const Header = (props: any) => {
 
   return (
     <HeaderSection>
-      <NavBar action={props.action} />
+      <NavBar action={props.action}/>
     </HeaderSection>
   );
 };

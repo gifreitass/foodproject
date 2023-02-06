@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const NavBar = (props:any) => {
+const NavBar = (props: any) => {
   const Nav = styled.nav`
     display: flex;
     align-items: center;
@@ -38,6 +38,14 @@ const NavBar = (props:any) => {
       margin: 10px 20px;
     }
   `;
+
+  const Notification = styled.span`
+   background-color: white;
+   text-align: center;
+   height: 20px;
+   width: 20px;
+   border-radius:  50%;
+  `
 
   return (
     <Nav>

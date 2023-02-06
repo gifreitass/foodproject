@@ -23,7 +23,7 @@ const SectionRestaurant: React.FC<{ restaurant: iGetRestaurants }> = (props) => 
 
     return (
         <AboutCard>
-            <img height={120} src={props.restaurant?.url} />
+            <img height={100} src={props.restaurant?.url} />
             <h2>{props.restaurant.nome}</h2>
 
             <img height={20} src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" />

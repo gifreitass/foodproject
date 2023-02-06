@@ -26,6 +26,10 @@ const Cart = styled.div`
     background-color: white;
     position: absolute;
     right: 0;
+
+    @media only screen and (max-width: 460px) {
+        width: 300px;
+    }
 `
 
 const CloseModal = styled.div`
@@ -40,7 +44,8 @@ const SectionOrdered = styled.div`
 `
 
 const ModalCart: React.FC<{ restaurant: iGetRestaurants, action: any, pedidos: Array<Pedidos> }> = (props) => {
-    console.log(props.pedidos)
+
+
     return (
         <ModalArea>
             <Cart>
@@ -53,9 +58,8 @@ const ModalCart: React.FC<{ restaurant: iGetRestaurants, action: any, pedidos: A
                 </div>
                 <SectionOrdered>
                     {props.pedidos.map((pedido: Pedidos) => {
-                        return <CardOrdered key={pedido.id} nome={pedido.nome} />
+                        return <CardOrdered key={pedido.id} pedido={pedido} />
                     })}
-
                 </SectionOrdered>
             </Cart>
 
