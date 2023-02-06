@@ -45,7 +45,7 @@ const Modal: React.FC<{onClose: () => void}> = (props) => {
     return (
         <ModalStyle>
             <TitleModal>Cadastrar Restaurante</TitleModal>
-            <ImageModal src="https://cdn-icons-png.flaticon.com/512/2734/2734822.png" onClick={props.onClose} />
+            <ImageModal src="https://cdn-icons-png.flaticon.com/512/2734/2734822.png" alt="imagem com símbolo para fechar a janela" onClick={props.onClose} />
             <ModalForm onSubmit={formik.handleSubmit}>
                 <ModalFormInputs>
                     <ModalLabel htmlFor="nome">Nome:</ModalLabel>

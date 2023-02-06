@@ -99,12 +99,14 @@ export const TextRestaurantRate = styled.div`
 
 export const ModalStyle = styled.div`
     background-color: #808080;
-    
     width: 45vw;
     border-radius: 10px;
     text-align: center;
     position: absolute;
     padding: 30px;
+    @media only screen and (max-width: 665px) {
+        width: 80vw;
+    }
 `
 
 export const DivTitleModal = styled.div`
@@ -155,10 +157,10 @@ export const ModalLabel = styled.label`
 export const ModalButton = styled.button`
     background-color: #000000;
     color: white;
-    padding: 5px;
+    padding: 5px 20px 5px 20px;
     border-radius: 5px;
     cursor: pointer;
-    width: 8vw;
+    width: fit-content;
 `
 
 export const DivModal = styled.div`

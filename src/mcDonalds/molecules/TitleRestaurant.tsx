@@ -1,5 +1,5 @@
-import { iGetRestaurants } from "../../allRestaurants/template/TemplateRestaurants"
-import { ImageRateTitleRestaurant, ImageTitleRestaurant, TextRateTitleRestaurant, TextTitleRestaurant, TitleRestaurantStyle } from "../styled.components"
+import { iGetRestaurants } from "../../interfaces/Interfaces"
+import { ImageRateTitleRestaurant, ImageTitleRestaurant, TextRateTitleRestaurant, TextTitleRestaurant, TitleRestaurantStyle } from "../styled-components"
 
 const TitleRestaurant: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
 
