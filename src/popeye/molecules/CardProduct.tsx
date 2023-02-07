@@ -44,20 +44,17 @@ const DivOperations = styled.div`
     align-items: center;
 `
 
-const CardProduct: React.FC<{ product: iGetProducts, updateProductCart: Function, productsCart: Array<Pedidos> }> = (props) => {
-
+const CardProduct: React.FC<{ product: iGetProducts, updateProductCart: Function, productsCart: Array<Pedidos>, updateLocalProductCart: any }> = (props) => {
     const [countProduct, setCountProduct] = useState(0)
-    var qtd = 0
 
     useEffect(() => {
         const copyProductsCart = [...props.productsCart];
-        const item: Pedidos = copyProductsCart.find((product) => product.id === props.product.id);
+        const item: any = copyProductsCart.find((product) => product.id === props.product.id);
 
         if (item && item.qtd) {
             setCountProduct(item.qtd)
         } else {
             setCountProduct(0)
-
         }
     }, [props.productsCart])
 
@@ -84,6 +81,7 @@ const CardProduct: React.FC<{ product: iGetProducts, updateProductCart: Function
         }
 
         props.updateProductCart(copyProductsCart);
+        props.updateLocalProductCart.set(copyProductsCart)
     }
 
     function removeProductToCart() {
@@ -94,34 +92,19 @@ const CardProduct: React.FC<{ product: iGetProducts, updateProductCart: Function
             if (item && item.qtd > 1) {
                 item.qtd = item.qtd - 1;
                 props.updateProductCart(copyProductsCart);
+                props.updateLocalProductCart.remove(copyProductsCart)
+
             } else {
                 const arrayFiltered = copyProductsCart.filter(
                     (product) => product.id !== props.product.id
                 );
-                props.updateProductCart(arrayFiltered);
+                props.updateProductCart(arrayFiltered)
+                props.updateLocalProductCart.remove(arrayFiltered)
+
             }
         }
+
     }
-
-    function clearCart() {
-        props.updateProductCart([]);
-    }
-
-    function sendOrder() {
-        pedido.nome = props.product.nome
-        pedido.idRestaurante = props.product.idRestaurante
-        pedido.id = props.product.id
-        pedido.descricao = props.product.descricao
-        if (!(props.product.promocao != "true")) {
-            pedido.valor = props.product.valorPromocional
-        } else {
-            pedido.valor = props.product.valor
-        }
-        pedido.qtd = qtd
-
-        props.updateProductCart(pedido)
-    }
-
 
     const DivPrices = styled.div`
         &>:first-child {

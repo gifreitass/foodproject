@@ -29,12 +29,12 @@ const Title = styled.div`
     justify-content: space-between;
 `
 
-const CardOrdered: React.FC<{ pedido: Pedidos, productsCart: Array<Pedidos>, updateProductCart: Function }> = (props) => {
+const CardOrdered: React.FC<{ pedido: Pedidos, productsCart: Array<Pedidos>, updateProductCart: Function, updateLocalProductCart: any }> = (props) => {
     const [countProduct, setCountProduct] = useState(0)
 
     useEffect(() => {
         const copyProductsCart = [...props.productsCart];
-        const item: Pedidos = copyProductsCart.find((product) => product.id === props.pedido.id);
+        const item: any = copyProductsCart.find((product) => product.id === props.pedido.id);
 
         if (item && item.qtd) {
             setCountProduct(item.qtd)
@@ -52,11 +52,16 @@ const CardOrdered: React.FC<{ pedido: Pedidos, productsCart: Array<Pedidos>, upd
             if (item && item.qtd > 1) {
                 item.qtd = item.qtd - 1;
                 props.updateProductCart(copyProductsCart);
+                props.updateLocalProductCart.remove(copyProductsCart)
+
             } else {
                 const arrayFiltered = copyProductsCart.filter(
                     (product) => product.id !== props.pedido.id
                 );
                 props.updateProductCart(arrayFiltered);
+                props.updateLocalProductCart.remove(arrayFiltered)
+
+
             }
         }
     }
