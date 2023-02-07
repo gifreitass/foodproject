@@ -33,7 +33,7 @@ export const InputStyle = styled.input`
 `
 
 export const SelectInputStyle = styled.select`
-    font-size: 15px;
+    font-size: 14px;
     margin: 15px;
     border-radius: 5px;
     padding: 5px;
