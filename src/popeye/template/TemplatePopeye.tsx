@@ -36,6 +36,10 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
         getProductRestaurantApi().catch(() => setErrorProducts(true))
     }, [])
 
+    useEffect(() => {
+        localStorage.setItem(props.restaurant.id + "_Products", JSON.stringify(listOrder))
+    }, [listOrder])
+
     const getProductRestaurantApi = async () => {
         const response = await axios.get('https://apigenerator.dronahq.com/api/3yNrDssc/produtos')
         setProducts(response.data.filter((produto: { idRestaurante: number | string }) => produto.idRestaurante == props.restaurant.id))
@@ -55,6 +59,7 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
             var index = array.indexOf(elemento);
             array.splice(index, 1);
         }
+
     }
 
     const onModal = () => {

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import styled from "styled-components"
 import { iGetRestaurants } from "../../interfaces/Interfaces"
 import CardOrdered from "../molecules/CardOrdered"
@@ -21,7 +22,7 @@ const Cart = styled.div`
     flex-direction: column;
     padding: 20px;
     gap: 10px;
-    height: 100%;
+    height: 90%;
     width: 400px;
     background-color: white;
     position: absolute;
@@ -39,12 +40,33 @@ const CloseModal = styled.div`
 const SectionOrdered = styled.div`
     display: flex;
     flex-direction: column;
-    margin-bottom:50px;
-
 `
 
-const ModalCart: React.FC<{ restaurant: iGetRestaurants, action: any, pedidos: Array<Pedidos> }> = (props) => {
+const ModalCart: React.FC<{ restaurant: iGetRestaurants, action: any, pedidos: Array<Pedidos>}> = (props) => {
+    const [qtdChild, setQtdChild] = useState()
+    const [total, setTotal] = useState(0)
 
+    useEffect(() => {
+        let totalCarrinho = 0
+
+        props.pedidos.map((pedido: Pedidos) => {
+            if (pedido.valor && pedido.qtd) {
+                totalCarrinho = totalCarrinho + (pedido.valor * pedido.qtd)
+            }
+        })
+        setTotal(totalCarrinho)
+    }, [])
+
+    function returnQtd(value?: any, produto?: string) {
+        props.pedidos.map((pedido: Pedidos) => {
+            if (pedido.nome == produto && pedido.valor) {
+                setTotal(total - pedido.valor)
+            }
+        })
+
+        console.log(value, produto)
+        setQtdChild(value)
+    }
 
     return (
         <ModalArea>
@@ -58,9 +80,12 @@ const ModalCart: React.FC<{ restaurant: iGetRestaurants, action: any, pedidos: A
                 </div>
                 <SectionOrdered>
                     {props.pedidos.map((pedido: Pedidos) => {
-                        return <CardOrdered key={pedido.id} pedido={pedido} />
+                        return <CardOrdered key={pedido.id} pedido={pedido} action={returnQtd} />
                     })}
                 </SectionOrdered>
+                <div>
+                    {total > 0 ? <p>Total: R${total.toFixed(2)}</p> : null}
+                </div>
             </Cart>
 
         </ModalArea>

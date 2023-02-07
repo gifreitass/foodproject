@@ -9,8 +9,8 @@ const GridProducts = styled.div`
     width: 80%;
     margin: 20px auto;
     align-items: stretch;
-    
-    @media only screen and (max-width: 830px) {
+
+    @media only screen and (max-width: 1050px) {
        display: flex;
        flex-direction: column;
     }
