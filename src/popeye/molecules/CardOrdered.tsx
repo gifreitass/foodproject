@@ -29,30 +29,49 @@ const Title = styled.div`
     justify-content: space-between;
 `
 
-const CardOrdered: React.FC<{ pedido: Pedidos, action: any }> = (props) => {
-    const [qtd, setQtd] = useState(props.pedido.qtd)
+const CardOrdered: React.FC<{ pedido: Pedidos, productsCart: Array<Pedidos>, updateProductCart: Function }> = (props) => {
+    const [countProduct, setCountProduct] = useState(0)
 
     useEffect(() => {
-        props.action(qtd, props.pedido.nome)
-    }, [qtd])
+        const copyProductsCart = [...props.productsCart];
+        const item: Pedidos = copyProductsCart.find((product) => product.id === props.pedido.id);
 
-    function subCart() {
-        if (qtd) {
-            setQtd(qtd - 1)
+        if (item && item.qtd) {
+            setCountProduct(item.qtd)
+        } else {
+            setCountProduct(0)
+
+        }
+    }, [props.productsCart])
+
+    function removeProductToCart() {
+        const copyProductsCart = [...props.productsCart];
+
+        const item = copyProductsCart.find((product) => product.id === props.pedido.id);
+        if (item && item.qtd) {
+            if (item && item.qtd > 1) {
+                item.qtd = item.qtd - 1;
+                props.updateProductCart(copyProductsCart);
+            } else {
+                const arrayFiltered = copyProductsCart.filter(
+                    (product) => product.id !== props.pedido.id
+                );
+                props.updateProductCart(arrayFiltered);
+            }
         }
     }
 
-    if (qtd && qtd > 0) {
+    if (countProduct && countProduct > 0) {
         return (
             <Card>
                 <Title>
-                    <h4 className="qtd">{qtd}un - {props.pedido.nome}</h4>
+                    <h4 className="qtd">{countProduct}un - {props.pedido.nome}</h4>
                     <h4 className="price">R${props.pedido.valor}</h4>
                 </Title>
                 <div>
                     {props.pedido.descricao}
                 </div>
-                <Button onClick={subCart}>Remover</Button>
+                <Button onClick={removeProductToCart}>Remover</Button>
 
             </Card>
         )
