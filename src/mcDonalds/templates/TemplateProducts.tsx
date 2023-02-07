@@ -25,6 +25,19 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
         getProductsApi()
     }, [])
 
+    useEffect(() => {
+        const storedProducts = localStorage.getItem("products")
+        if (storedProducts) {
+            setProductsCart(JSON.parse(storedProducts))
+        }
+    }, [])
+
+    useEffect(() => {
+        if (productsCart.length > 0) {
+            localStorage.setItem("products", JSON.stringify(productsCart))
+        }
+    }, [productsCart])
+
 
     const handleClickProduct = (evt: React.MouseEvent<HTMLImageElement>) => {
         const copyProducts = [...products]
@@ -32,7 +45,6 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
         const newProduct = copyProducts.filter((product) => product.nome === evt.currentTarget.id)
         filteredProducts.push(...newProduct)
         setProductsCart(filteredProducts)
-        console.log(filteredProducts)
     }
 
     return (
