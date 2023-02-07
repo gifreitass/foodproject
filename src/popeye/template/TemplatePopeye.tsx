@@ -36,7 +36,6 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     }, [])
 
     useEffect(() => {
-        console.log(productsCart)
     }, [productsCart])
 
     const getProductRestaurantApi = async () => {

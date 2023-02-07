@@ -29,8 +29,6 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
         const filteredProducts: iGetProducts[] = [...productsCart]
         const newProduct = copyProducts.filter((product) => product.nome === evt.currentTarget.id)
         filteredProducts.push(...newProduct)
-        const uniqueArray = filteredProducts.filter((product, index) => filteredProducts.indexOf(product) === index)
-        console.log(uniqueArray)
         setProductsCart(filteredProducts)
     }
 
