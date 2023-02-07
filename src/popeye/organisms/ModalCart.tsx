@@ -42,12 +42,11 @@ const SectionOrdered = styled.div`
     flex-direction: column;
 `
 
-const ModalCart: React.FC<{ restaurant: iGetRestaurants, modalFunction: React.MouseEventHandler<HTMLDivElement>, pedidos: Array<Pedidos>, updateProductCart: Function }> = (props) => {
+const ModalCart: React.FC<{ restaurant: iGetRestaurants, modalFunction: React.MouseEventHandler<HTMLDivElement>, pedidos: Array<Pedidos>, updateProductCart: Function, updateLocalProductCart: any }> = (props) => {
     const [total, setTotal] = useState(0)
 
     useEffect(() => {
         let totalCarrinho = 0
-
         props.pedidos.map((pedido: Pedidos) => {
             if (pedido.valor && pedido.qtd) {
                 totalCarrinho = totalCarrinho + (pedido.valor * pedido.qtd)
@@ -74,6 +73,7 @@ const ModalCart: React.FC<{ restaurant: iGetRestaurants, modalFunction: React.Mo
                             pedido={pedido}
                             productsCart={props.pedidos}
                             updateProductCart={props.updateProductCart}
+                            updateLocalProductCart={props.updateLocalProductCart}
                         />
                     })}
                 </SectionOrdered>

@@ -33,10 +33,9 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     useEffect(() => {
         setErrorProducts(false)
         getProductRestaurantApi().catch(() => setErrorProducts(true))
-    }, [])
+       setProductsCart(Storage.get)
 
-    useEffect(() => {
-    }, [productsCart])
+    }, [])
 
     const getProductRestaurantApi = async () => {
         const response = await axios.get('https://apigenerator.dronahq.com/api/3yNrDssc/produtos')
@@ -46,15 +45,37 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     function updateProductCart(value: Array<Pedidos>) {
         setProductsCart(value)
     }
+    //https://pt.stackoverflow.com/questions/528754/remover-um-objeto-dentro-de-um-array-salvo-no-localstorage
+    const Storage = {
+        get() {
+            //@ts-ignore
+            return JSON.parse(localStorage.getItem(props.restaurant.id + "_restaurant")) || null
+        },
+        set(value: any) {
+            localStorage.setItem(props.restaurant.id + "_restaurant", JSON.stringify(value))
+        },
+        remove(values: any) {
+            localStorage.setItem(props.restaurant.id + "_restaurant", JSON.stringify(values))
+        }
+    }
 
     const onModal = () => {
         setViewModal(!viewModal)
     }
 
+
     return (
         <>
             <Header modalFunction={onModal} />
-            {viewModal ? <ModalCart pedidos={productsCart} restaurant={props.restaurant} modalFunction={onModal} updateProductCart={updateProductCart} /> : null}
+            {viewModal ?
+                <ModalCart
+                    pedidos={productsCart}
+                    restaurant={props.restaurant}
+                    modalFunction={onModal}
+                    updateProductCart={updateProductCart}
+                    updateLocalProductCart={Storage}
+                />
+                : null}
 
             <Main>
                 <SectionRestaurant restaurant={props.restaurant} />
@@ -64,7 +85,10 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
                         products={products}
                         productsCart={productsCart}
                         updateProductCart={updateProductCart}
-                    />}
+                        updateLocalProductCart={Storage}
+
+                    />
+                    }
             </Main>
         </>
     )

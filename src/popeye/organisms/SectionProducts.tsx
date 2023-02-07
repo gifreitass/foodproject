@@ -17,7 +17,7 @@ const GridProducts = styled.div`
     }
 `
 
-const SectionProducts: React.FC<{ products: iGetProducts[], updateProductCart: Function, productsCart: Array<Pedidos> }> = (props) => {
+const SectionProducts: React.FC<{ products: iGetProducts[], updateProductCart: Function, productsCart: Array<Pedidos>, updateLocalProductCart:any }> = (props) => {
 
     return (
         <GridProducts>
@@ -27,6 +27,8 @@ const SectionProducts: React.FC<{ products: iGetProducts[], updateProductCart: F
                     product={product}
                     productsCart={props.productsCart}
                     updateProductCart={props.updateProductCart}
+                    updateLocalProductCart={props.updateLocalProductCart}
+
                 />
             })}
         </GridProducts>
