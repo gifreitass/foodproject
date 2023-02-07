@@ -24,7 +24,7 @@ const PageProductsRestaurants: React.FC<{}> = () => {
                 return <h1>Erro de Conexão com a API</h1>
             } else {
                 if (currentRestaurant) {
-                    return <TemplateProducts restaurant={currentRestaurant} />
+                    return <TemplatePopeye restaurant={currentRestaurant} />
                 } else {
                     return <h1>Loading...</h1>
                 }

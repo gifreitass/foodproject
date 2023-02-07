@@ -30,7 +30,6 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
         if (localData) {
             setProductsCart(JSON.parse(localData))
         }
-
     }, [])
 
     const getProductRestaurantApi = async () => {
