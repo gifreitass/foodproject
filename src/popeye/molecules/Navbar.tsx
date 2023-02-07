@@ -14,11 +14,7 @@ const NavBar: React.FC<{ modalFunction: React.MouseEventHandler<HTMLElement> }> 
   const Ul = styled.ul`
     display: flex;
     justify-content: space-between;
-    width: 90%;
-
-    @media only screen and (max-width: 460px) {
-      flex-direction: column;
-    }
+    width: 100%;
   `;
 
   const Li = styled.li`
@@ -32,20 +28,12 @@ const NavBar: React.FC<{ modalFunction: React.MouseEventHandler<HTMLElement> }> 
     & > a {
       display: flex;
       align-items: center;
-      height: 100%;
+      
       color: black;
       text-decoration: none;
-      margin: 10px 20px;
     }
   `;
 
-  const Notification = styled.span`
-   background-color: white;
-   text-align: center;
-   height: 20px;
-   width: 20px;
-   border-radius:  50%;
-  `
 
   return (
     <Nav>

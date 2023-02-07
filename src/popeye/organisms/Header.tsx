@@ -10,12 +10,8 @@ const HeaderSection = styled.header`
   color: black;
   height: 10vh;
   padding: 10px;
-  position: fixed;
-  top: 0;
-  width: 100%;
 
   @media only screen and (max-width: 460px) {
-    height: 30vh;
   }
 `;
 
