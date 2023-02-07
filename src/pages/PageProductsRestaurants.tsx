@@ -1,5 +1,4 @@
-import axios from "axios"
-import { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 import { useParams } from "react-router-dom"
 import { GetRestaurantsContext } from "../context/GetRestaurantsContext"
 import TemplateAllProducts from "../allRestaurants/template/TemplateAllProducts"
