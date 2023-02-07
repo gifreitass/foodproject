@@ -1,9 +1,9 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import styled from "styled-components"
 import { iGetProducts, iGetRestaurants } from "../../interfaces/Interfaces"
 import Header from "../organisms/Header"
 import ModalCart from "../organisms/ModalCart"
+import ModalConfirmation from "../organisms/ModalConfirmation"
 import SectionProducts from "../organisms/SectionProducts"
 import SectionRestaurant from "../organisms/SectionRestaurant"
 
@@ -16,24 +16,17 @@ export interface Pedidos {
     descricao?: string,
 }
 
-const Main = styled.main`
-    margin-top: 15vh;
-
-    @media only screen and (max-width: 460px) {
-        margin-top: 32vh;
-    }
-`
-
 const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     const [products, setProducts] = useState<iGetProducts[]>([])
     const [productsCart, setProductsCart] = useState<Array<Pedidos>>([]);
-    const [viewModal, setViewModal] = useState<boolean>(false)
+    const [viewModalCart, setViewModalCart] = useState<boolean>(false)
+    const [viewModalConfirmation, setViewModalConfirmation] = useState<boolean>(false)
     const [errorProducts, setErrorProducts] = useState<boolean>(false)
 
     useEffect(() => {
         setErrorProducts(false)
         getProductRestaurantApi().catch(() => setErrorProducts(true))
-       setProductsCart(Storage.get)
+        setProductsCart(Storage.get)
 
     }, [])
 
@@ -59,25 +52,35 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
         }
     }
 
-    const onModal = () => {
-        setViewModal(!viewModal)
+    const onModalCart = () => {
+        setViewModalCart(!viewModalCart)
+    }
+
+    const onModalConfirmation = () => {
+        setViewModalConfirmation(!viewModalConfirmation)
     }
 
 
     return (
         <>
-            <Header modalFunction={onModal} />
-            {viewModal ?
+            {viewModalCart ?
                 <ModalCart
                     pedidos={productsCart}
                     restaurant={props.restaurant}
-                    modalFunction={onModal}
+                    modalFunction={onModalCart}
                     updateProductCart={updateProductCart}
                     updateLocalProductCart={Storage}
+                    onModalConfirmation ={onModalConfirmation}
                 />
                 : null}
+            <Header modalFunction={onModalCart} />
 
-            <Main>
+            {viewModalConfirmation ?
+                <ModalConfirmation modalFnc={onModalConfirmation} />
+                : null
+            }
+
+            <main>
                 <SectionRestaurant restaurant={props.restaurant} />
                 {errorProducts ? <h1>Error loading products...</h1>
                     :
@@ -88,8 +91,9 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
                         updateLocalProductCart={Storage}
 
                     />
-                    }
-            </Main>
+                }
+            </main>
+
         </>
     )
 
