@@ -3,7 +3,7 @@ import { iGetProducts, iGetRestaurants } from "../../interfaces/Interfaces"
 import { CartContext } from "../CartProvider"
 import { DivContainsProductOnShoppingCart, DivProductOnShoppingCart, ImageCloseModal, ModalStyleShoppingCart, RemoveButton, TitleShoppingCart, TitleRestaurantShoppingCart, DivTotal, DivProducts, DivFinalShoppingCart, ButtonShoppingCart } from "../styled-components"
 
-const ModalShoppingCart: React.FC<{onClose: () => void, products: iGetProducts[], restaurant: iGetRestaurants}> = (props) => {
+const ModalShoppingCart: React.FC<{onClose: () => void, products: iGetProducts[], restaurant: iGetRestaurants, onClick: () => void}> = (props) => {
     const { productsCart, numberProduct } = useContext(CartContext)
     
     return (
@@ -28,7 +28,7 @@ const ModalShoppingCart: React.FC<{onClose: () => void, products: iGetProducts[]
                     <p>Total</p>
                     <p>R$130,9</p>
                 </DivTotal>
-                <ButtonShoppingCart>Finalizar pedido</ButtonShoppingCart>
+                <ButtonShoppingCart onClick={props.onClick}>Finalizar pedido</ButtonShoppingCart>
             </DivFinalShoppingCart>
         </ModalStyleShoppingCart>
     )

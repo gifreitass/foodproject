@@ -222,3 +222,12 @@ export const ButtonShoppingCart = styled.button`
     margin-top: 15px;
     cursor: pointer;
 `
+
+export const DivModalClient = styled.div`
+    position: fixed;
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
