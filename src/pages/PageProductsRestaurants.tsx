@@ -1,7 +1,6 @@
 import { useContext } from "react"
 import { useParams } from "react-router-dom"
 import { GetRestaurantsContext } from "../context/GetRestaurantsContext"
-import TemplateAllProducts from "../allRestaurants/template/TemplateAllProducts"
 import TemplateProducts from "../mcDonalds/templates/TemplateProducts"
 import TemplatePopeye from "../popeye/template/TemplatePopeye"
 

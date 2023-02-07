@@ -1,41 +1,43 @@
-import { createContext, useState } from "react";
+import { createContext, useMemo, useState } from "react";
 import { iGetProducts } from "../interfaces/Interfaces";
 
 interface ICartContext {
     productsCart: iGetProducts[],
-    setProductsCart: any,
-    addProductCart: (id: number) => void
-    numberProduct: (nameProduct: string) => void
+    setProductsCart: (productsCart: iGetProducts[]) => void,
+    numberProduct: (nameProduct: string) => number,
+    removeProduct: (id: number) => void,
+    totalCart: number
 }
 
-export const CartContext = createContext<ICartContext>({ productsCart: [], setProductsCart: () => { }, addProductCart: () => { }, numberProduct: () => { } })
+export const CartContext = createContext<ICartContext>({ productsCart: [], setProductsCart: () => { }, numberProduct: () => 0, removeProduct: () => { }, totalCart: 0 })
 
 export default function CartProvider (props: any) {
     const [productsCart, setProductsCart] = useState<iGetProducts[]>([])
 
-    function addProductCart (id: number) {
-        const copyProductsCart = [...productsCart]
+    const totalCart = useMemo(() => {
+        const total = productsCart.reduce((acc, product) => {
+            if (Number(product.valorPromocional) > 0){
+                return acc + Number(product.valorPromocional)
+            }
+            return acc + Number(product.valor)
+        }, 0)
+        return total
+    }, [productsCart])
 
-        const item = copyProductsCart.find((product) => {product.id === id})
-
-        if (!item) {
-            
-        }
-    }
-
-    function removeProductCart (id: number) {
-        const copyProductsCart = [...productsCart]
-
-        const item = copyProductsCart.find((product) => {product.id === id})
-    }
-
-    function numberProduct (nameProduct: string) {
+    function numberProduct(nameProduct: string) {
         const number = productsCart.filter((productCart) => productCart.nome === nameProduct).length
         return number
     }
 
+    function removeProduct(id: number) {
+        const index = productsCart.findIndex((product) => product.id === id)
+        const copyProductsCart = [...productsCart]
+        copyProductsCart.splice(index, 1)
+        setProductsCart(copyProductsCart)
+    }
+
     return (
-        <CartContext.Provider value={{ productsCart, addProductCart, setProductsCart, numberProduct }}>
+        <CartContext.Provider value={{ productsCart, setProductsCart, numberProduct, removeProduct, totalCart }}>
             {props.children}
         </CartContext.Provider>
     )

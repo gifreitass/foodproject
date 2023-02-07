@@ -32,6 +32,7 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
         const newProduct = copyProducts.filter((product) => product.nome === evt.currentTarget.id)
         filteredProducts.push(...newProduct)
         setProductsCart(filteredProducts)
+        console.log(filteredProducts)
     }
 
     return (
