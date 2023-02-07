@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const NavBar = (props: any) => {
+const NavBar: React.FC<{ modalFunction: React.MouseEventHandler<HTMLElement> }> = (props) => {
   const Nav = styled.nav`
     display: flex;
     align-items: center;
@@ -66,7 +66,7 @@ const NavBar = (props: any) => {
           <Link to='/pedido'>
             <img height={40} src="https://cdn-icons-png.flaticon.com/512/2704/2704832.png" />
           </Link>
-          <Link to='#' onClick={props.action}>
+          <Link to='#' onClick={props.modalFunction}>
             <img height={40} src="https://cdn-icons-png.flaticon.com/512/4175/4175270.png" />
           </Link>
         </Li>

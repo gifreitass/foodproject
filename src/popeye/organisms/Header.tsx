@@ -20,11 +20,11 @@ const HeaderSection = styled.header`
 `;
 
 
-const Header = (props: any) => {
+const Header: React.FC<{ modalFunction: React.MouseEventHandler<HTMLDivElement> }> = (props) => {
 
   return (
     <HeaderSection>
-      <NavBar action={props.action}/>
+      <NavBar modalFunction={props.modalFunction} />
     </HeaderSection>
   );
 };

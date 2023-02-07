@@ -1,8 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
-import { iGetRestaurants } from "../../interfaces/Interfaces"
-import { iGetProducts } from "../../mcDonalds/templates/TemplateProducts"
+import { iGetProducts, iGetRestaurants } from "../../interfaces/Interfaces"
 import Header from "../organisms/Header"
 import ModalCart from "../organisms/ModalCart"
 import SectionProducts from "../organisms/SectionProducts"
@@ -26,8 +25,8 @@ const Main = styled.main`
 `
 
 const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
-    const [listOrder, setListOrder] = useState<Array<Pedidos>>([])
     const [products, setProducts] = useState<iGetProducts[]>([])
+    const [productsCart, setProductsCart] = useState<Array<Pedidos>>([]);
     const [viewModal, setViewModal] = useState<boolean>(false)
     const [errorProducts, setErrorProducts] = useState<boolean>(false)
 
@@ -37,29 +36,16 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     }, [])
 
     useEffect(() => {
-        localStorage.setItem(props.restaurant.id + "_Products", JSON.stringify(listOrder))
-    }, [listOrder])
+        console.log(productsCart)
+    }, [productsCart])
 
     const getProductRestaurantApi = async () => {
         const response = await axios.get('https://apigenerator.dronahq.com/api/3yNrDssc/produtos')
         setProducts(response.data.filter((produto: { idRestaurante: number | string }) => produto.idRestaurante == props.restaurant.id))
     }
 
-    const addOrderCart = (pedido: Pedidos) => {
-        removerPorId(listOrder, pedido.id)
-        setListOrder([...listOrder, pedido])
-    }
-
-    //Fonte: https://pt.stackoverflow.com/questions/209702/como-excluir-um-item-de-um-array-pelo-valor-do-atributo
-    const removerPorId = (array: Array<Pedidos>, id: any) => {
-        var result = array.filter(function (el) {
-            return el.id == id;
-        });
-        for (var elemento of result) {
-            var index = array.indexOf(elemento);
-            array.splice(index, 1);
-        }
-
+    function updateProductCart(value: Array<Pedidos>) {
+        setProductsCart(value)
     }
 
     const onModal = () => {
@@ -68,12 +54,18 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
 
     return (
         <>
-            <Header action={onModal} />
-            {viewModal ? <ModalCart pedidos={listOrder} restaurant={props.restaurant} action={onModal} /> : null}
+            <Header modalFunction={onModal} />
+            {viewModal ? <ModalCart pedidos={productsCart} restaurant={props.restaurant} modalFunction={onModal} updateProductCart={updateProductCart} /> : null}
 
             <Main>
                 <SectionRestaurant restaurant={props.restaurant} />
-                {errorProducts ? <h1>Error loading products...</h1> : <SectionProducts products={products} action={addOrderCart} />}
+                {errorProducts ? <h1>Error loading products...</h1>
+                    :
+                    <SectionProducts
+                        products={products}
+                        productsCart={productsCart}
+                        updateProductCart={updateProductCart}
+                    />}
             </Main>
         </>
     )

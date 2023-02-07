@@ -44,28 +44,67 @@ const DivOperations = styled.div`
     align-items: center;
 `
 
-const CardProduct: React.FC<{ product: iGetProducts, action: any }> = (props) => {
+const CardProduct: React.FC<{ product: iGetProducts, updateProductCart: Function, productsCart: Array<Pedidos> }> = (props) => {
 
     const [countProduct, setCountProduct] = useState(0)
-    var pedido: Pedidos = new Object();
     var qtd = 0
 
-    function subCart() {
-        if (countProduct >= 0) {
-            if (countProduct == 0) {
-                setCountProduct(countProduct)
-            } else {
-                setCountProduct(countProduct - 1)
-            }
-            qtd = countProduct - 1
+    useEffect(() => {
+        const copyProductsCart = [...props.productsCart];
+        const item: Pedidos = copyProductsCart.find((product) => product.id === props.product.id);
+
+        if (item && item.qtd) {
+            setCountProduct(item.qtd)
+        } else {
+            setCountProduct(0)
+
         }
-        sendOrder()
+    }, [props.productsCart])
+
+
+    function addProducToCart() {
+        const copyProductsCart = [...props.productsCart];
+
+        const item = copyProductsCart.find((product) => product.id === props.product.id);
+
+        if (!item) {
+            copyProductsCart.push({
+                id: props.product.id,
+                qtd: 1,
+                valor: !(props.product.promocao != "true") ? props.product.valorPromocional : props.product.valor,
+                nome: props.product.nome,
+                idRestaurante: props.product.idRestaurante,
+                descricao: props.product.descricao,
+
+            });
+        } else {
+            if (item.qtd) {
+                item.qtd = item.qtd + 1;
+            }
+        }
+
+        props.updateProductCart(copyProductsCart);
     }
 
-    function addCart() {
-        setCountProduct(countProduct + 1)
-        qtd = countProduct + 1
-        sendOrder()
+    function removeProductToCart() {
+        const copyProductsCart = [...props.productsCart];
+
+        const item = copyProductsCart.find((product) => product.id === props.product.id);
+        if (item && item.qtd) {
+            if (item && item.qtd > 1) {
+                item.qtd = item.qtd - 1;
+                props.updateProductCart(copyProductsCart);
+            } else {
+                const arrayFiltered = copyProductsCart.filter(
+                    (product) => product.id !== props.product.id
+                );
+                props.updateProductCart(arrayFiltered);
+            }
+        }
+    }
+
+    function clearCart() {
+        props.updateProductCart([]);
     }
 
     function sendOrder() {
@@ -80,7 +119,7 @@ const CardProduct: React.FC<{ product: iGetProducts, action: any }> = (props) =>
         }
         pedido.qtd = qtd
 
-        props.action(pedido)
+        props.updateProductCart(pedido)
     }
 
 
@@ -111,11 +150,11 @@ const CardProduct: React.FC<{ product: iGetProducts, action: any }> = (props) =>
                 <img width={200} src={props.product.url} alt="" />
             </div>
             <DivOperations>
-                <ButtonAddCart onClick={addCart}>
+                <ButtonAddCart onClick={addProducToCart}>
                     <img height={30} src="https://cdn-icons-png.flaticon.com/512/992/992651.png" alt="" />
                 </ButtonAddCart>
                 {countProduct}
-                <ButtonAddCart onClick={subCart}>
+                <ButtonAddCart onClick={removeProductToCart}>
                     <img height={30} src="https://cdn.icon-icons.com/icons2/2090/PNG/512/minus_icon_128415.png" alt="" />
                 </ButtonAddCart>
             </DivOperations>

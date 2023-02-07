@@ -42,8 +42,7 @@ const SectionOrdered = styled.div`
     flex-direction: column;
 `
 
-const ModalCart: React.FC<{ restaurant: iGetRestaurants, action: any, pedidos: Array<Pedidos>}> = (props) => {
-    const [qtdChild, setQtdChild] = useState()
+const ModalCart: React.FC<{ restaurant: iGetRestaurants, modalFunction: React.MouseEventHandler<HTMLDivElement>, pedidos: Array<Pedidos>, updateProductCart: Function }> = (props) => {
     const [total, setTotal] = useState(0)
 
     useEffect(() => {
@@ -55,23 +54,13 @@ const ModalCart: React.FC<{ restaurant: iGetRestaurants, action: any, pedidos: A
             }
         })
         setTotal(totalCarrinho)
-    }, [])
+    }, [props.pedidos])
 
-    function returnQtd(value?: any, produto?: string) {
-        props.pedidos.map((pedido: Pedidos) => {
-            if (pedido.nome == produto && pedido.valor) {
-                setTotal(total - pedido.valor)
-            }
-        })
-
-        console.log(value, produto)
-        setQtdChild(value)
-    }
 
     return (
         <ModalArea>
             <Cart>
-                <CloseModal onClick={props.action}>
+                <CloseModal onClick={props.modalFunction}>
                     <img height={30} src="https://cdn.icon-icons.com/icons2/1993/PNG/512/cancel_circle_close_delete_discard_file_x_icon_123219.png" alt="close" />
                 </CloseModal>
                 <div>
@@ -80,7 +69,12 @@ const ModalCart: React.FC<{ restaurant: iGetRestaurants, action: any, pedidos: A
                 </div>
                 <SectionOrdered>
                     {props.pedidos.map((pedido: Pedidos) => {
-                        return <CardOrdered key={pedido.id} pedido={pedido} action={returnQtd} />
+                        return <CardOrdered
+                            key={pedido.id}
+                            pedido={pedido}
+                            productsCart={props.pedidos}
+                            updateProductCart={props.updateProductCart}
+                        />
                     })}
                 </SectionOrdered>
                 <div>
