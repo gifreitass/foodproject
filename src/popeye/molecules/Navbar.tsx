@@ -63,7 +63,7 @@ const NavBar = (props: any) => {
           </Link>
         </Li>
         <Li>
-          <Link to='/pedidos'>
+          <Link to='/pedido'>
             <img height={40} src="https://cdn-icons-png.flaticon.com/512/2704/2704832.png" />
           </Link>
           <Link to='#' onClick={props.action}>

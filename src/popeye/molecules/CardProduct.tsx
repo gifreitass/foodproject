@@ -29,7 +29,6 @@ const Card = styled.div`
 
 
 const ButtonAddCart = styled.button`
-    float: right;
     display: flex;
     align-items: center;
     font-size: 20px;
@@ -39,29 +38,37 @@ const ButtonAddCart = styled.button`
     cursor: pointer;
 `
 
+const DivOperations = styled.div`
+    display: flex;
+    gap: 10px;
+    align-items: center;
+`
 
-
-const teste = [
-    {"nome":"teste1","valor":"25", "descricao":"teste1"},
-    {"nome":"teste2","valor":"20", "descricao":"teste2"},
-    {"nome":"teste3","valor":"15", "descricao":"teste3"},
-    {"nome":"teste4","valor":"10", "descricao":"teste4"},
-    {"nome":"teste5","valor":"5", "descricao":"teste5"},
-    {"nome":"teste6","valor":"2", "descricao":"teste6"},
-
-]
-
-const CardProduct: React.FC<{ product: iGetProducts, action:any }> = (props) => {
+const CardProduct: React.FC<{ product: iGetProducts, action: any }> = (props) => {
 
     const [countProduct, setCountProduct] = useState(0)
     var pedido: Pedidos = new Object();
     var qtd = 0
 
+    function subCart() {
+        if (countProduct >= 0) {
+            if (countProduct == 0) {
+                setCountProduct(countProduct)
+            } else {
+                setCountProduct(countProduct - 1)
+            }
+            qtd = countProduct - 1
+        }
+        sendOrder()
+    }
 
     function addCart() {
         setCountProduct(countProduct + 1)
         qtd = countProduct + 1
-        
+        sendOrder()
+    }
+
+    function sendOrder() {
         pedido.nome = props.product.nome
         pedido.idRestaurante = props.product.idRestaurante
         pedido.id = props.product.id
@@ -87,6 +94,7 @@ const CardProduct: React.FC<{ product: iGetProducts, action:any }> = (props) => 
 
     return (
         <Card id={props.product.idRestaurante + "_" + props.product.id}>
+
             <div>
                 <div>
                     <h2>{props.product.nome}</h2>
@@ -96,14 +104,22 @@ const CardProduct: React.FC<{ product: iGetProducts, action:any }> = (props) => 
                         {!(props.product.promocao != "true") ? <h3>R${props.product.valorPromocional}</h3> : null}
                     </DivPrices>
                 </div>
-                <ButtonAddCart onClick={addCart}>
-                    <img height={30} src="https://cdn-icons-png.flaticon.com/512/992/992651.png" alt="" /> {countProduct}
-                </ButtonAddCart>
+
 
             </div>
             <div>
                 <img width={200} src={props.product.url} alt="" />
             </div>
+            <DivOperations>
+                <ButtonAddCart onClick={addCart}>
+                    <img height={30} src="https://cdn-icons-png.flaticon.com/512/992/992651.png" alt="" />
+                </ButtonAddCart>
+                {countProduct}
+                <ButtonAddCart onClick={subCart}>
+                    <img height={30} src="https://cdn.icon-icons.com/icons2/2090/PNG/512/minus_icon_128415.png" alt="" />
+                </ButtonAddCart>
+            </DivOperations>
+
         </Card>
     )
 }
