@@ -1,8 +1,8 @@
+import { iGetProducts } from "../../interfaces/Interfaces"
 import DivProducts from "../atoms/DivProduct"
 import { AllProductsStyle, DivContainsAllProducts } from "../styled-components"
-import { iGetProducts } from "../templates/TemplateProducts"
 
-const AllProducts: React.FC<{ products: iGetProducts[] }> = (props) => {
+const AllProducts: React.FC<{ products: iGetProducts[], onClick: (evt: React.MouseEvent<HTMLImageElement>) => void }> = (props) => {
     return (
         <DivContainsAllProducts>
             <h1>Produtos</h1>
@@ -14,7 +14,9 @@ const AllProducts: React.FC<{ products: iGetProducts[] }> = (props) => {
                             url={product.url} valor={product.valor}
                             promocao={product.promocao}
                             valorPromocional={product.valorPromocional}
-                            descricao={product.descricao} />
+                            descricao={product.descricao}
+                            onClick={props.onClick}
+                            />
                     }
                 })}
             </AllProductsStyle>

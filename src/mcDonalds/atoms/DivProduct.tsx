@@ -1,7 +1,15 @@
+import { useContext } from "react"
+import { iGetProducts } from "../../interfaces/Interfaces"
+import { CartContext } from "../CartProvider"
 import { DivAddProduct, DivImageProduct, DivPriceProduct, DivProductStyle, DivTextProduct, ImageAddProduct, ImageProduct, PriceAndStock } from "../styled-components"
-import { iGetProducts } from "../templates/TemplateProducts"
 
-const DivProducts: React.FC<iGetProducts> = (props) => {
+interface IPropsDivProducts extends iGetProducts {
+    onClick: (evt: React.MouseEvent<HTMLImageElement>) => void,
+}
+
+const DivProducts: React.FC<IPropsDivProducts> = (props) => {
+    const { numberProduct } = useContext(CartContext)
+
     return (
         <DivProductStyle>
             <DivTextProduct>
@@ -18,8 +26,8 @@ const DivProducts: React.FC<iGetProducts> = (props) => {
             </DivTextProduct>
             <DivImageProduct>
                 <DivAddProduct>
-                    <ImageAddProduct src="https://cdn-icons-png.flaticon.com/512/992/992651.png" alt="soma" />
-                    <PriceAndStock>0</PriceAndStock>
+                    <ImageAddProduct id={props.nome} onClick={props.onClick} src="https://cdn-icons-png.flaticon.com/512/992/992651.png" alt="soma" />
+                    <PriceAndStock>{`${numberProduct(props.nome)}`}</PriceAndStock>
                 </DivAddProduct>
                 <ImageProduct src={props.url} alt={props.descricao} />
             </DivImageProduct>

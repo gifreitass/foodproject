@@ -1,25 +1,18 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import AllProducts from "../molecules/AllProducts"
 import NavBarMc from "../molecules/NavBarMc"
 import TitleRestaurant from "../molecules/TitleRestaurant"
 import axios from "axios"
 import { DivModalShoppingCart, MainProducts } from "../styled-components"
-import { iGetRestaurants } from "../../interfaces/Interfaces"
+import { iGetProducts, iGetRestaurants } from "../../interfaces/Interfaces"
 import ModalShoppingCart from "../molecules/ModalShoppingCart"
-
-export interface iGetProducts {
-    idRestaurante?: number,
-    nome: string,
-    url: string,
-    valor: number,
-    promocao: string,
-    valorPromocional: number,
-    descricao: string
-}
+import { CartContext } from "../CartProvider"
 
 const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     const [products, setProducts] = useState<iGetProducts[]>([])
     const [isModalVisible, setModalVisible] = useState<boolean>(false)
+
+    const { setProductsCart, productsCart, addProductCart } = useContext(CartContext)
 
     const getProductsApi = async () => {
         const response = await axios.get('https://apigenerator.dronahq.com/api/3yNrDssc/produtos')
@@ -29,6 +22,17 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     useEffect(() => {
         getProductsApi()
     }, [])
+
+
+    const handleClickProduct = (evt: React.MouseEvent<HTMLImageElement>) => {
+        const copyProducts = [...products]
+        const filteredProducts: iGetProducts[] = [...productsCart]
+        const newProduct = copyProducts.filter((product) => product.nome === evt.currentTarget.id)
+        filteredProducts.push(...newProduct)
+        const uniqueArray = filteredProducts.filter((product, index) => filteredProducts.indexOf(product) === index)
+        console.log(uniqueArray)
+        setProductsCart(filteredProducts)
+    }
 
     return (
         <>
@@ -40,7 +44,7 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
                     </DivModalShoppingCart> : null
                 }
                 <TitleRestaurant restaurant={props.restaurant} />
-                <AllProducts products={products} />
+                <AllProducts onClick={handleClickProduct} products={products} />
             </MainProducts>
         </>
     )

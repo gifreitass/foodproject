@@ -1,31 +1,27 @@
-import { iGetRestaurants } from "../../interfaces/Interfaces"
+import { useContext } from "react"
+import { iGetProducts, iGetRestaurants } from "../../interfaces/Interfaces"
+import { CartContext } from "../CartProvider"
 import { DivContainsProductOnShoppingCart, DivProductOnShoppingCart, ImageCloseModal, ModalStyleShoppingCart, RemoveButton, TitleShoppingCart, TitleRestaurantShoppingCart, DivTotal, DivProducts, DivFinalShoppingCart, ButtonShoppingCart } from "../styled-components"
-import { iGetProducts } from "../templates/TemplateProducts"
 
 const ModalShoppingCart: React.FC<{onClose: () => void, products: iGetProducts[], restaurant: iGetRestaurants}> = (props) => {
+    const { productsCart, numberProduct } = useContext(CartContext)
+    
     return (
         <ModalStyleShoppingCart>
             <ImageCloseModal src="https://cdn-icons-png.flaticon.com/512/2734/2734822.png" alt="imagem com símbolo para fechar a janela" onClick={props.onClose}/>
             <TitleShoppingCart>Seu pedido em</TitleShoppingCart>
             <TitleRestaurantShoppingCart>{props.restaurant.nome}</TitleRestaurantShoppingCart>
-            {/* renderizar os produtos */}
             <DivProducts>
-                <DivContainsProductOnShoppingCart>
+                {productsCart.filter((product, index) => productsCart.indexOf(product) === index).map((productCart, index) => {
+                    return <DivContainsProductOnShoppingCart key={`productCart-item${index}`}>
                     <DivProductOnShoppingCart>
-                        <p>1x Produto 1</p>
-                        <p>R$25,9</p>
+                        <p>{`${numberProduct(productCart.nome)}x ${productCart.nome}`}</p>
+                        <p>R${productCart.valor}</p>
                     </DivProductOnShoppingCart>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum ipsa, maxime facilis obcaecati architecto, aliquid suscipit molestias a</p>
+                    <p>{productCart.descricao}</p>
                     <RemoveButton>Remover</RemoveButton>
                 </DivContainsProductOnShoppingCart>
-                <DivContainsProductOnShoppingCart>
-                    <DivProductOnShoppingCart>
-                        <p>1x Produto 1</p>
-                        <p>R$25,9</p>
-                    </DivProductOnShoppingCart>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum ipsa, maxime facilis obcaecati architecto, aliquid suscipit molestias a</p>
-                    <RemoveButton>Remover</RemoveButton>
-                </DivContainsProductOnShoppingCart>
+                })}
             </DivProducts>
             <DivFinalShoppingCart>
                 <DivTotal>
