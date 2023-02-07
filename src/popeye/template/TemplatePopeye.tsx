@@ -26,7 +26,10 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     useEffect(() => {
         setErrorProducts(false)
         getProductRestaurantApi().catch(() => setErrorProducts(true))
-        setProductsCart(Storage.get)
+        const localData = localStorage.getItem(props.restaurant.id + "_restaurant")
+        if (localData) {
+            setProductsCart(JSON.parse(localData))
+        }
 
     }, [])
 
@@ -40,10 +43,6 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     }
     //https://pt.stackoverflow.com/questions/528754/remover-um-objeto-dentro-de-um-array-salvo-no-localstorage
     const Storage = {
-        get() {
-            //@ts-ignore
-            return JSON.parse(localStorage.getItem(props.restaurant.id + "_restaurant")) || null
-        },
         set(value: any) {
             localStorage.setItem(props.restaurant.id + "_restaurant", JSON.stringify(value))
         },
@@ -70,7 +69,7 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
                     modalFunction={onModalCart}
                     updateProductCart={updateProductCart}
                     updateLocalProductCart={Storage}
-                    onModalConfirmation ={onModalConfirmation}
+                    onModalConfirmation={onModalConfirmation}
                 />
                 : null}
             <Header modalFunction={onModalCart} />
