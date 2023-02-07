@@ -3,16 +3,18 @@ import AllProducts from "../molecules/AllProducts"
 import NavBarMc from "../molecules/NavBarMc"
 import TitleRestaurant from "../molecules/TitleRestaurant"
 import axios from "axios"
-import { DivModalShoppingCart, MainProducts } from "../styled-components"
+import { DivModalClient, DivModalShoppingCart, MainProducts } from "../styled-components"
 import { iGetProducts, iGetRestaurants } from "../../interfaces/Interfaces"
 import ModalShoppingCart from "../molecules/ModalShoppingCart"
 import { CartContext } from "../CartProvider"
+import ModalClient from "../molecules/ModalClient"
 
 const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     const [products, setProducts] = useState<iGetProducts[]>([])
-    const [isModalVisible, setModalVisible] = useState<boolean>(false)
+    const [isModalCartVisible, setModalCartVisible] = useState<boolean>(false)
+    const [isModalClientVisible, setModalClientVisible] = useState<boolean>(false)
 
-    const { setProductsCart, productsCart, addProductCart } = useContext(CartContext)
+    const { setProductsCart, productsCart } = useContext(CartContext)
 
     const getProductsApi = async () => {
         const response = await axios.get('https://apigenerator.dronahq.com/api/3yNrDssc/produtos')
@@ -29,22 +31,25 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
         const filteredProducts: iGetProducts[] = [...productsCart]
         const newProduct = copyProducts.filter((product) => product.nome === evt.currentTarget.id)
         filteredProducts.push(...newProduct)
-        const uniqueArray = filteredProducts.filter((product, index) => filteredProducts.indexOf(product) === index)
-        console.log(uniqueArray)
         setProductsCart(filteredProducts)
     }
 
     return (
         <>
             <MainProducts>
-                <NavBarMc onClick={() => setModalVisible(true)} />
-                {isModalVisible ?
+                <NavBarMc onClick={() => setModalCartVisible(true)} />
+                {isModalCartVisible ?
                     <DivModalShoppingCart>
-                        <ModalShoppingCart restaurant={props.restaurant} products={products} onClose={() => setModalVisible(false)} />
+                        <ModalShoppingCart onClick={() => setModalClientVisible(true)} restaurant={props.restaurant} products={products} onClose={() => setModalCartVisible(false)} />
                     </DivModalShoppingCart> : null
                 }
+                {isModalClientVisible ?
+                    <DivModalClient>
+                        <ModalClient onClose={() => setModalClientVisible(false)} />
+                    </DivModalClient> : null
+                }
                 <TitleRestaurant restaurant={props.restaurant} />
-                <AllProducts onClick={handleClickProduct} products={products} />
+                <AllProducts onClick={handleClickProduct} products={products} restaurant={props.restaurant} />
             </MainProducts>
         </>
     )

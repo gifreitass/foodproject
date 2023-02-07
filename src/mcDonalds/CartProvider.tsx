@@ -18,11 +18,15 @@ export default function CartProvider (props: any) {
 
         const item = copyProductsCart.find((product) => {product.id === id})
 
-        console.log(item)
-
         if (!item) {
             
         }
+    }
+
+    function removeProductCart (id: number) {
+        const copyProductsCart = [...productsCart]
+
+        const item = copyProductsCart.find((product) => {product.id === id})
     }
 
     function numberProduct (nameProduct: string) {

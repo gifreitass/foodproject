@@ -79,6 +79,9 @@ export const AllProductsStyle = styled.div`
     padding: 20px;
     justify-content: center;
     margin: 0 auto;
+    @media only screen and (max-width: 800px){
+        grid-template-columns: repeat(1, 1fr);
+    }
 `
 
 export const DivContainsAllProducts = styled.div`
@@ -97,6 +100,10 @@ export const TitleRestaurantStyle = styled.div`
     border-radius: 10px;
     padding: 20px 40px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    @media only screen and (max-width: 800px){
+        margin: 40px;
+        text-align: center;
+    }
 `
 
 export const ImageTitleRestaurant = styled.img`
@@ -142,6 +149,9 @@ export const ModalStyleShoppingCart = styled.div`
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
+    @media only screen and (max-width: 800px){
+        width: 50vw;
+    }
 `
 
 export const ImageCloseModal = styled.img`
@@ -211,4 +221,13 @@ export const ButtonShoppingCart = styled.button`
     font-size: 15px;
     margin-top: 15px;
     cursor: pointer;
+`
+
+export const DivModalClient = styled.div`
+    position: fixed;
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
