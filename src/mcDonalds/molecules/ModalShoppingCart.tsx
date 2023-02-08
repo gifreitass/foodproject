@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { iGetProducts, iGetRestaurants } from "../../interfaces/Interfaces"
+import removeDuplicatesByNome from "../../utils/removeDuplicatesByNome"
 import { CartContext } from "../CartProvider"
 import { DivContainsProductOnShoppingCart, DivProductOnShoppingCart, ImageCloseModal, ModalStyleShoppingCart, RemoveButton, TitleShoppingCart, TitleRestaurantShoppingCart, DivTotal, DivProducts, DivFinalShoppingCart, ButtonShoppingCart } from "../styled-components"
 
@@ -16,7 +17,7 @@ const ModalShoppingCart: React.FC<{ onClose: () => void, products: iGetProducts[
             <TitleShoppingCart>Seu pedido em</TitleShoppingCart>
             <TitleRestaurantShoppingCart>{props.restaurant.nome}</TitleRestaurantShoppingCart>
             <DivProducts>
-                {productsCart.filter((product, index) => productsCart.indexOf(product) === index).map((productCart, index) => {
+                {removeDuplicatesByNome(productsCart).map((productCart: iGetProducts, index: number) => {
                     return <DivContainsProductOnShoppingCart key={`productCart-item${index}`}>
                         <DivProductOnShoppingCart>
                             <p>{`${numberProduct(productCart.nome)}x ${productCart.nome}`}</p>
