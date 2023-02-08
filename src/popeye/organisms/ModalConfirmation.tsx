@@ -41,8 +41,8 @@ const CloseModal = styled.button`
 const ModalConfirmation: React.FC<{ modalFnc: any, pedidos: any, restaurant: iGetRestaurants, updateLocalProductCart: any }> = (props) => {
 
     function teste() {
-        const pedido = JSON.parse(localStorage.getItem(props.restaurant.id + "_restaurant") || '')
-        let pedidos = JSON.parse(localStorage.getItem("pedidos") || '') || []
+        const pedido = JSON.parse(localStorage.getItem(props.restaurant.id + "_restaurant"))
+        let pedidos = JSON.parse(localStorage.getItem("pedidos")) || []
         pedidos.push(pedido)
         localStorage.setItem("pedidos", JSON.stringify(pedidos))
         props.updateLocalProductCart.set([])
