@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
+import { iGetRestaurants } from "../../interfaces/Interfaces"
+import { Pedidos } from "../template/TemplatePopeye"
 
 const ModalArea = styled.section` 
     display: flex;
@@ -36,10 +38,15 @@ const CloseModal = styled.button`
     cursor: pointer;
     height: min-content;
 `
-const ModalConfirmation: React.FC<{ modalFnc: any }> = (props) => {
+const ModalConfirmation: React.FC<{ modalFnc: any, pedidos: any, restaurant: iGetRestaurants, updateLocalProductCart: any }> = (props) => {
 
-    const AlertConfirm = ()=>{
-        alert("Usúario Confirmado, Bon Appetit!")
+    function teste() {
+        const pedido = JSON.parse(localStorage.getItem(props.restaurant.id + "_restaurant") || '')
+        let pedidos = JSON.parse(localStorage.getItem("pedidos") || '') || []
+        pedidos.push(pedido)
+        localStorage.setItem("pedidos", JSON.stringify(pedidos))
+        props.updateLocalProductCart.set([])
+        alert("Usúario Verificado, Bon Appetit")
     }
 
     return (
@@ -66,7 +73,7 @@ const ModalConfirmation: React.FC<{ modalFnc: any }> = (props) => {
                     <input type="text" name="cpf" />
                 </InputField>
 
-                <Link onClick={AlertConfirm} to={"/pedido"}> <ButtonConfirm>Verificar</ButtonConfirm></Link>
+                <ButtonConfirm onClick={teste}>Verificar</ButtonConfirm>
             </Form>
         </ModalArea>
     )

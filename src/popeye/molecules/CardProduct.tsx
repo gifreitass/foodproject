@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { iGetProducts } from "../../interfaces/Interfaces"
+import { iGetProducts, iGetRestaurants } from "../../interfaces/Interfaces"
 import { Pedidos } from "../template/TemplatePopeye";
 
 const Card = styled.div`
@@ -23,7 +23,6 @@ const Card = styled.div`
       
     @media only screen and (max-width: 600px) {
        flex-direction: column;
-       
     }
 `;
 
@@ -44,7 +43,14 @@ const DivOperations = styled.div`
     align-items: center;
 `
 
-const CardProduct: React.FC<{ product: iGetProducts, updateProductCart: Function, productsCart: Array<Pedidos>, updateLocalProductCart: any }> = (props) => {
+const CardProduct: React.FC<{
+    product: iGetProducts,
+    updateProductCart: Function,
+    productsCart: Array<Pedidos>,
+    updateLocalProductCart: any,
+    restaurant: iGetRestaurants
+
+}> = (props) => {
     const [countProduct, setCountProduct] = useState(0)
 
     useEffect(() => {
@@ -61,9 +67,7 @@ const CardProduct: React.FC<{ product: iGetProducts, updateProductCart: Function
 
     function addProducToCart() {
         const copyProductsCart = [...props.productsCart];
-
         const item = copyProductsCart.find((product) => product.id === props.product.id);
-
         if (!item) {
             copyProductsCart.push({
                 id: props.product.id,
@@ -72,14 +76,14 @@ const CardProduct: React.FC<{ product: iGetProducts, updateProductCart: Function
                 nome: props.product.nome,
                 idRestaurante: props.product.idRestaurante,
                 descricao: props.product.descricao,
-
+                nomeRestaurant: props.restaurant.nome,
+                urlRestaurant: props.restaurant.url
             });
         } else {
             if (item.qtd) {
                 item.qtd = item.qtd + 1;
             }
         }
-
         props.updateProductCart(copyProductsCart);
         props.updateLocalProductCart.set(copyProductsCart)
     }
