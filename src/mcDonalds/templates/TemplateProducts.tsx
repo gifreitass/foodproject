@@ -8,13 +8,14 @@ import { iGetProducts, iGetRestaurants } from "../../interfaces/Interfaces"
 import ModalShoppingCart from "../molecules/ModalShoppingCart"
 import { CartContext } from "../CartProvider"
 import ModalClient from "../molecules/ModalClient"
+import removeDuplicatesByNome from "../../utils/removeDuplicatesByNome"
 
 const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     const [products, setProducts] = useState<iGetProducts[]>([])
     const [isModalCartVisible, setModalCartVisible] = useState<boolean>(false)
     const [isModalClientVisible, setModalClientVisible] = useState<boolean>(false)
 
-    const { setProductsCart, productsCart } = useContext(CartContext)
+    const { setProductsCart, productsCart, numberProduct } = useContext(CartContext)
 
     const getProductsApi = async () => {
         const response = await axios.get('https://apigenerator.dronahq.com/api/3yNrDssc/produtos')
@@ -27,15 +28,16 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
 
     useEffect(() => {
         const storedProducts = localStorage.getItem("products")
-        if (storedProducts) {
-            setProductsCart(JSON.parse(storedProducts))
+        if (storedProducts && productsCart.length <= 0) {
+            const storedProductsParsed = JSON.parse(storedProducts || '')
+            if (storedProductsParsed.length > 0) {
+                setProductsCart(storedProductsParsed)
+            }
         }
     }, [])
 
     useEffect(() => {
-        if (productsCart.length > 0) {
-            localStorage.setItem("products", JSON.stringify(productsCart))
-        }
+        localStorage.setItem("products", JSON.stringify(productsCart))
     }, [productsCart])
 
 
@@ -45,6 +47,21 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
         const newProduct = copyProducts.filter((product) => product.nome === evt.currentTarget.id)
         filteredProducts.push(...newProduct)
         setProductsCart(filteredProducts)
+    }
+
+    const handleClickClient = (e: any) => {
+        e.preventDefault()
+        setProductsCart([])
+        sendToOrderPage()
+    }
+
+    function sendToOrderPage () {
+        let productsArray = removeDuplicatesByNome(productsCart)
+        console.log(productsArray)
+        productsArray.forEach((item) => {
+            item.qtd = numberProduct(item.nome)
+        })
+        console.log(productsArray)
     }
 
     return (
@@ -58,7 +75,7 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
                 }
                 {isModalClientVisible ?
                     <DivModalClient>
-                        <ModalClient onClose={() => setModalClientVisible(false)} />
+                        <ModalClient onClick={handleClickClient} onClose={() => setModalClientVisible(false)} />
                     </DivModalClient> : null
                 }
                 <TitleRestaurant restaurant={props.restaurant} />
