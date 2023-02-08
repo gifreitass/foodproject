@@ -71,6 +71,9 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
         e.preventDefault()
         setProductsCart([])
         createOrder(adaptedOrder)
+        alert("Usúario Verificado, Bon Appetit")
+        setModalCartVisible(false)
+        setModalClientVisible(false)
     }
 
     return (
