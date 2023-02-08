@@ -2,7 +2,7 @@ import { Image, InputStyle, NavBarStyle } from "../styled-components"
 import { Link } from "react-router-dom"
 import React from "react"
 
-const NavBar: React.FC<{
+const NavBarHome: React.FC<{
     findRestaurant: string,
     setFindRestaurant: React.Dispatch<React.SetStateAction<string>>,
     onClick?: (evt: React.MouseEvent<HTMLImageElement>) => void
@@ -23,4 +23,4 @@ const NavBar: React.FC<{
     )
 }
 
-export default NavBar
+export default NavBarHome
