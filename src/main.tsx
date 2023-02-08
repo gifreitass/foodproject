@@ -25,7 +25,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<PageAllRestaurants />} />
-            <Route path='/pedido' element={<PageOrders />} />
+            <Route path='/pedidos' element={<PageOrders />} />
             <Route path='/:id' element={<PageProductsRestaurants />} />
           </Routes>
           <GlobalStyle />

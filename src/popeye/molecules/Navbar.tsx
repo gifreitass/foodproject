@@ -51,7 +51,7 @@ const NavBar: React.FC<{ modalFunction: React.MouseEventHandler<HTMLElement> }> 
           </Link>
         </Li>
         <Li>
-          <Link to='/pedido'>
+          <Link to='/pedidos'>
             <img height={40} src="https://cdn-icons-png.flaticon.com/512/2704/2704832.png" />
           </Link>
           <Link to='#' onClick={props.modalFunction}>

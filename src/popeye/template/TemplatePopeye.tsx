@@ -13,6 +13,8 @@ export interface Pedidos {
     nome?: string,
     valor?: number,
     qtd?: number;
+    urlRestaurant?: string;
+    nomeRestaurant?: string;
     descricao?: string,
 }
 
@@ -56,6 +58,7 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
 
     const onModalConfirmation = () => {
         setViewModalConfirmation(!viewModalConfirmation)
+        setViewModalCart(!viewModalCart)
     }
 
 
@@ -74,7 +77,11 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
             <Header modalFunction={onModalCart} />
 
             {viewModalConfirmation ?
-                <ModalConfirmation modalFnc={onModalConfirmation} />
+                <ModalConfirmation
+                    restaurant={props.restaurant}
+                    modalFnc={onModalConfirmation}
+                    updateLocalProductCart={Storage}
+                    pedidos={productsCart} />
                 : null
             }
 
@@ -87,7 +94,7 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
                         productsCart={productsCart}
                         updateProductCart={updateProductCart}
                         updateLocalProductCart={Storage}
-
+                        restaurant={props.restaurant}
                     />
                 }
             </main>
