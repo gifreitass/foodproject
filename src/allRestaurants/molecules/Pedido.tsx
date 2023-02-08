@@ -11,14 +11,15 @@ const DivPedido = styled.div`
     transition: 0.3s;
     height: 300px;
     overflow-y: auto;
-    //width: 100%;
+    border-radius: 10px;
+    font-size: 20px;
 
     @media only screen and (max-width: 600px) {
        flex-direction: column;
     }
   
 `
-const NameProduct = styled.h4`
+const NameProduct = styled.h5`
     border-bottom: 2px dashed black;
     color: red;
 `

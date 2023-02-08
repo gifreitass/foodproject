@@ -1,10 +1,9 @@
-import { useState } from "react"
 import styled from "styled-components"
 import { Pedidos } from "../../popeye/template/TemplatePopeye"
-import NavBar from "../molecules/NavBar"
+import NavBarOrders from "../molecules/NavBarOrders"
 import Pedido from "../molecules/Pedido"
 
-const GridOrdes = styled.div`
+const GridOrders = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 
@@ -22,12 +21,11 @@ const GridOrdes = styled.div`
 `
 
 const TemplateOrders: React.FC<{ pedidos: Array<Pedidos> }> = (props) => {
-    const [findRestaurant, setFindRestaurant] = useState<string>('')
     return (
         <>
-            <NavBar findRestaurant={findRestaurant} setFindRestaurant={setFindRestaurant} />
+            <NavBarOrders />
 
-            <GridOrdes>
+            <GridOrders>
                 {props.pedidos
                     ?
                     props.pedidos.map((pedido: Pedidos, index) => {
@@ -37,7 +35,7 @@ const TemplateOrders: React.FC<{ pedidos: Array<Pedidos> }> = (props) => {
                     <h1>Sem Pedidos</h1>
                 }
 
-            </GridOrdes>
+            </GridOrders>
 
 
         </>

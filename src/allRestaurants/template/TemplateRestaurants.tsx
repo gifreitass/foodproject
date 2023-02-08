@@ -1,12 +1,13 @@
 import { ChangeEvent, useState } from "react"
 import Modal from "../molecules/Modal"
-import NavBar from "../molecules/NavBar"
+import NavBar from "../molecules/NavBarHome"
 import Restaurants from "../molecules/Restaurants"
 import SelectInput from "../molecules/SelectInput"
 import { DivModal } from "../styled-components"
 import { useContext } from "react"
 import { GetRestaurantsContext } from "../../context/GetRestaurantsContext"
 import { iGetRestaurants } from "../../interfaces/Interfaces"
+import NavBarHome from "../molecules/NavBarHome"
 
 
 const TemplateRestaurants: React.FC = () => {
@@ -40,7 +41,7 @@ const TemplateRestaurants: React.FC = () => {
                     <Modal onClose={() => setModalVisible(false)} />
                 </DivModal> : null
             }
-            <NavBar findRestaurant={findRestaurant} setFindRestaurant={setFindRestaurant} onClick={() => setModalVisible(true)} />
+            <NavBarHome findRestaurant={findRestaurant} setFindRestaurant={setFindRestaurant} onClick={() => setModalVisible(true)} />
             <SelectInput restaurants={restaurants} changeCategory={onChangeCategory} changeOrder={onChangeOrder} />
             <Restaurants restaurants={restaurants} findRestaurant={findRestaurant} filterCategory={filterCategory} />
         </>
