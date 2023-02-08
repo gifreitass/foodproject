@@ -1,13 +1,16 @@
 import { useContext, useEffect, useState } from "react"
 import TemplateOrders from "../allRestaurants/template/TemplateOrders"
+import { Pedidos } from "../popeye/template/TemplatePopeye"
 
 const PageOrders = () => {
-    const [pedidos, setPedidos] = useState([])
+    const [pedidos, setPedidos] = useState<Pedidos[]>([])
 
-    const localData = JSON.parse(localStorage.getItem("pedidos"))
+    const localData: Pedidos[] = JSON.parse(localStorage.getItem("pedidos") || '[]')
+    const giLocalData: Pedidos[] = JSON.parse(localStorage.getItem("giPedidos") || '[]')
+    const mergedLocalData = [...localData, ...giLocalData]
 
     useEffect(() => {
-        setPedidos(localData)
+        setPedidos(mergedLocalData)
     }, [])
 
     return (

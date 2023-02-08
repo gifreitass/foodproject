@@ -22,14 +22,14 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <GetRestaurantsProvider>
       <CartProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<PageAllRestaurants />} />
-            <Route path='/pedidos' element={<PageOrders />} />
-            <Route path='/:id' element={<PageProductsRestaurants />} />
-          </Routes>
-          <GlobalStyle />
-        </BrowserRouter>
+          <BrowserRouter>
+            <Routes>
+              <Route path='/' element={<PageAllRestaurants />} />
+              <Route path='/pedidos' element={<PageOrders />} />
+              <Route path='/:id' element={<PageProductsRestaurants />} />
+            </Routes>
+            <GlobalStyle />
+          </BrowserRouter>
       </CartProvider>
     </GetRestaurantsProvider>
   </React.StrictMode>

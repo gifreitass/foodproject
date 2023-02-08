@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useMemo, useState } from "react"
 import AllProducts from "../molecules/AllProducts"
 import NavBarMc from "../molecules/NavBarMc"
 import TitleRestaurant from "../molecules/TitleRestaurant"
@@ -9,13 +9,31 @@ import ModalShoppingCart from "../molecules/ModalShoppingCart"
 import { CartContext } from "../CartProvider"
 import ModalClient from "../molecules/ModalClient"
 import removeDuplicatesByNome from "../../utils/removeDuplicatesByNome"
+import { Pedidos } from "../../popeye/template/TemplatePopeye"
 
 const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     const [products, setProducts] = useState<iGetProducts[]>([])
     const [isModalCartVisible, setModalCartVisible] = useState<boolean>(false)
     const [isModalClientVisible, setModalClientVisible] = useState<boolean>(false)
 
-    const { setProductsCart, productsCart, numberProduct } = useContext(CartContext)
+    const { setProductsCart, productsCart, createOrder, numberProduct } = useContext(CartContext)
+
+    const adaptedOrder = useMemo(() => {
+        let productsArray: iGetProducts[] = removeDuplicatesByNome(productsCart)
+        const adaptedArray: Pedidos[] = productsArray.map((produto) => {
+            return {
+                descricao: produto.descricao,
+                id: produto.id,
+                idRestaurante: produto.idRestaurante,
+                nome: produto.nome,
+                nomeRestaurant: props.restaurant.nome,
+                qtd: numberProduct(produto.nome),
+                urlRestaurant: props.restaurant.url,
+                valor: produto.valorPromocional > 0 ? produto.valorPromocional : produto.valor
+            }
+        })
+        return adaptedArray
+    }, [productsCart])
 
     const getProductsApi = async () => {
         const response = await axios.get('https://apigenerator.dronahq.com/api/3yNrDssc/produtos')
@@ -52,16 +70,7 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     const handleClickClient = (e: any) => {
         e.preventDefault()
         setProductsCart([])
-        sendToOrderPage()
-    }
-
-    function sendToOrderPage () {
-        let productsArray = removeDuplicatesByNome(productsCart)
-        console.log(productsArray)
-        productsArray.forEach((item) => {
-            item.qtd = numberProduct(item.nome)
-        })
-        console.log(productsArray)
+        createOrder(adaptedOrder)
     }
 
     return (

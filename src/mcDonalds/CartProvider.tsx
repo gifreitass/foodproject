@@ -1,15 +1,17 @@
 import { createContext, useEffect, useMemo, useState } from "react";
 import { iGetProducts } from "../interfaces/Interfaces";
+import { Pedidos } from "../popeye/template/TemplatePopeye";
 
 interface ICartContext {
     productsCart: iGetProducts[],
     setProductsCart: (productsCart: iGetProducts[]) => void,
     numberProduct: (nameProduct: string) => number,
     removeProduct: (id: number) => void,
-    totalCart: number
+    totalCart: number,
+    createOrder: (pedido: Pedidos[]) => void
 }
 
-export const CartContext = createContext<ICartContext>({ productsCart: [], setProductsCart: () => { }, numberProduct: () => 0, removeProduct: () => { }, totalCart: 0 })
+export const CartContext = createContext<ICartContext>({ productsCart: [], setProductsCart: () => { }, numberProduct: () => 0, removeProduct: () => { }, totalCart: 0, createOrder: () => {} })
 
 export default function CartProvider (props: any) {
     const [productsCart, setProductsCart] = useState<iGetProducts[]>([])
@@ -36,8 +38,15 @@ export default function CartProvider (props: any) {
         setProductsCart(copyProductsCart)
     }
 
+    function createOrder (pedido: Pedidos[]) {
+        const pedidosStorage = localStorage.getItem("giPedidos")
+        const parsedPedidosStorage = JSON.parse(pedidosStorage || '[]')
+        parsedPedidosStorage.push(pedido)
+        localStorage.setItem("giPedidos", JSON.stringify(parsedPedidosStorage))
+    }
+
     return (
-        <CartContext.Provider value={{ productsCart, setProductsCart, numberProduct, removeProduct, totalCart }}>
+        <CartContext.Provider value={{ productsCart, setProductsCart, numberProduct, removeProduct, totalCart, createOrder }}>
             {props.children}
         </CartContext.Provider>
     )
