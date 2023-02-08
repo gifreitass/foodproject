@@ -1,6 +1,5 @@
 import { useState } from "react"
 import styled from "styled-components"
-import { iGetRestaurants } from "../../interfaces/Interfaces"
 import { Pedidos } from "../../popeye/template/TemplatePopeye"
 import NavBar from "../molecules/NavBar"
 import Pedido from "../molecules/Pedido"
