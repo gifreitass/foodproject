@@ -6,8 +6,7 @@ export interface iGetProducts {
     promocao: string,
     valorPromocional: number,
     descricao: string,
-    id?: string | number,
-    qtd?: number
+    id?: string | number
 }
 
 export interface iGetRestaurants {
