@@ -58,7 +58,6 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
 
     const onModalConfirmation = () => {
         setViewModalConfirmation(!viewModalConfirmation)
-        setViewModalCart(!viewModalCart)
     }
 
 
@@ -80,6 +79,7 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
                 <ModalConfirmation
                     restaurant={props.restaurant}
                     modalFnc={onModalConfirmation}
+                    updateProductCart={updateProductCart}
                     updateLocalProductCart={Storage}
                     pedidos={productsCart} />
                 : null
