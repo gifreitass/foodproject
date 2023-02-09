@@ -38,14 +38,15 @@ const CloseModal = styled.button`
     cursor: pointer;
     height: min-content;
 `
-const ModalConfirmation: React.FC<{ modalFnc: any, pedidos: any, restaurant: iGetRestaurants, updateLocalProductCart: any }> = (props) => {
+const ModalConfirmation: React.FC<{ modalFnc: any, pedidos: any, restaurant: iGetRestaurants, updateProductCart: Function, updateLocalProductCart: any }> = (props) => {
 
-    function teste() {
+    function addPedidos() {
         const pedido = JSON.parse(localStorage.getItem(props.restaurant.id + "_restaurant"))
         let pedidos = JSON.parse(localStorage.getItem("pedidos")) || []
         pedidos.push(pedido)
         localStorage.setItem("pedidos", JSON.stringify(pedidos))
         props.updateLocalProductCart.set([])
+        props.updateProductCart([])
         alert("Usúario Verificado, Bon Appetit")
     }
 
@@ -73,7 +74,7 @@ const ModalConfirmation: React.FC<{ modalFnc: any, pedidos: any, restaurant: iGe
                     <input type="text" name="cpf" />
                 </InputField>
 
-                <ButtonConfirm onClick={teste}>Verificar</ButtonConfirm>
+                <ButtonConfirm onClick={addPedidos}>Verificar</ButtonConfirm>
             </Form>
         </ModalArea>
     )
