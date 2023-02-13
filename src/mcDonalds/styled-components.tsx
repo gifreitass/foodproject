@@ -103,6 +103,8 @@ export const TitleRestaurantStyle = styled.div`
     @media only screen and (max-width: 800px){
         margin: 40px;
         text-align: center;
+        /* width: 70vw; */
+        flex-wrap: wrap;
     }
 `
 
