@@ -39,10 +39,10 @@ export default function CartProvider (props: any) {
     }
 
     function createOrder (pedido: Pedidos[]) {
-        const pedidosStorage = localStorage.getItem("giPedidos")
+        const pedidosStorage = localStorage.getItem("mcPedidos")
         const parsedPedidosStorage = JSON.parse(pedidosStorage || '[]')
         parsedPedidosStorage.push(pedido)
-        localStorage.setItem("giPedidos", JSON.stringify(parsedPedidosStorage))
+        localStorage.setItem("mcPedidos", JSON.stringify(parsedPedidosStorage))
     }
 
     return (
