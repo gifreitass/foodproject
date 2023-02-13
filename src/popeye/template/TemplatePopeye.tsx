@@ -49,6 +49,9 @@ const TemplatePopeye: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
         },
         remove(values: any) {
             localStorage.setItem(props.restaurant.id + "_restaurant", JSON.stringify(values))
+        },
+        delete(id: any){
+            localStorage.removeItem(id)
         }
     }
 

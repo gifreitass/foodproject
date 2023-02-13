@@ -16,6 +16,7 @@ const ModalArea = styled.section`
 `
 const Form = styled.div`
     background-color: white;
+    border-radius: 20px;
     padding: 20px;
     position: fixed;
     align-items: center;
@@ -41,12 +42,15 @@ const CloseModal = styled.button`
 const ModalConfirmation: React.FC<{ modalFnc: any, pedidos: any, restaurant: iGetRestaurants, updateProductCart: Function, updateLocalProductCart: any }> = (props) => {
 
     function addPedidos() {
+        //@ts-ignore
         const pedido = JSON.parse(localStorage.getItem(props.restaurant.id + "_restaurant"))
+        //@ts-ignore
         let pedidos = JSON.parse(localStorage.getItem("pedidos")) || []
         pedidos.push(pedido)
         localStorage.setItem("pedidos", JSON.stringify(pedidos))
-        props.updateLocalProductCart.set([])
+        props.updateLocalProductCart.delete(props.restaurant.id + "_restaurant")
         props.updateProductCart([])
+        props.modalFnc()
         alert("Usúario Verificado, Bon Appetit")
     }
 
