@@ -27,8 +27,8 @@ export const NavBarStyle = styled.nav`
 
 export const InputStyle = styled.input`
     border-radius: 5px;
-    padding: 10px;
-    width: 20vw;
+    padding: 10px 20px 10px 20px;
+    width: fit-content;
     background-color: #EEEEEE;
 `
 
