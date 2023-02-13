@@ -6,7 +6,7 @@ const PageOrders = () => {
     const [pedidos, setPedidos] = useState<Pedidos[]>([])
 
     const localData: Pedidos[] = JSON.parse(localStorage.getItem("pedidos") || '[]')
-    const giLocalData: Pedidos[] = JSON.parse(localStorage.getItem("giPedidos") || '[]')
+    const giLocalData: Pedidos[] = JSON.parse(localStorage.getItem("mcPedidos") || '[]')
     const mergedLocalData = [...localData, ...giLocalData]
 
     useEffect(() => {
