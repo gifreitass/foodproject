@@ -2,12 +2,14 @@
 
 Projeto desenvolvido em React + TypeScript, em equipe, com o objetivo de por em prática os conhecimentos adquiridos ao longo do curso de Desenvolvimento Front-End da Flit.
 
+> [Acesse o site](https://app-food-project-deploy-fd9a.vercel.app/)
+
 ## 🖥️ Devs:
 
--  Gabriel Uchoa:
+-  Gabriel Uchoa - Template do Popeye:
    > [Linkedin](https://www.linkedin.com/in/gabriel-uchoa/) -
    > [Github](https://github.com/Gabriel-Uchoa)
--  Giovanna de Freitas:
+-  Giovanna de Freitas - Template do McDonalds:
    > [Linkedin](https://www.linkedin.com/in/gifreitasss/) -
    > [Github](https://github.com/gifreitass)
 
