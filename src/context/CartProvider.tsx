@@ -1,6 +1,6 @@
 import { createContext, useEffect, useMemo, useState } from "react";
 import { iGetProducts } from "../interfaces/Interfaces";
-import { Pedidos } from "../popeye/template/TemplatePopeye";
+import { Pedidos } from "../allRestaurants/template/TemplateProducts";
 
 interface ICartContext {
     productsCart: iGetProducts[],

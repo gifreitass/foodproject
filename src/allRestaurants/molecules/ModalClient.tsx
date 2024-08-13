@@ -1,4 +1,4 @@
-import { ModalStyle, ModalFormInputs, TitleModal, ModalInput, ModalTextArea, ModalLabel, ModalButton, ImageModal, SelectInputStyle } from "../../allRestaurants/styled-components"
+import { ModalStyle, ModalFormInputs, TitleModal, ModalInput, ModalTextArea, ModalLabel, ModalButton, ImageModal, SelectInputStyle } from "../styled-components"
 
 const ModalClient: React.FC<{onClose: () => void, onClick: (e: any) => void}> = (props) => {
     return (

@@ -3,12 +3,13 @@ import DivProducts from "../atoms/DivProduct"
 import { AllProductsStyle, DivContainsAllProducts } from "../styled-components"
 
 const AllProducts: React.FC<{ products: iGetProducts[], onClick: (evt: React.MouseEvent<HTMLImageElement>) => void, restaurant: iGetRestaurants }> = (props) => {
+    console.log(props.products)
     return (
         <DivContainsAllProducts>
             <h1>Produtos</h1>
             <AllProductsStyle>
                 {props.products.map((product, index) => {
-                    if (product.idRestaurante === props.restaurant.id) {
+                    if (product.restauranteId === props.restaurant.id) {
                         return <DivProducts key={`allProducts-items${index}`}
                             nome={product.nome}
                             url={product.url} valor={product.valor}

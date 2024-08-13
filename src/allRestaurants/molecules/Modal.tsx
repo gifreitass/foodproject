@@ -31,7 +31,7 @@ const Modal: React.FC<{onClose: () => void}> = (props) => {
                     .min(10, 'O campo de sobre precisa ter pelo menos 10 caracteres')
             }),
         onSubmit: async () => {
-            await axios.post('https://apigenerator.dronahq.com/api/dstqgR3A/restaurantes', {
+            await axios.post('http://localhost:3000/restaurantes', {
                 url: formik.values.url,
                 nome: formik.values.nome,
                 categoria: formik.values.categoria,

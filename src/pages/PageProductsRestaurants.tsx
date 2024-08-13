@@ -1,35 +1,16 @@
 import { useContext } from "react"
 import { useParams } from "react-router-dom"
 import { GetRestaurantsContext } from "../context/GetRestaurantsContext"
-import TemplateProducts from "../mcDonalds/templates/TemplateProducts"
-import TemplatePopeye from "../popeye/template/TemplatePopeye"
+import TemplateProducts from "../allRestaurants/template/TemplateProducts"
 
 const PageProductsRestaurants: React.FC<{}> = () => {
     const { id } = useParams()
-    const { restaurants, errorRequest } = useContext(GetRestaurantsContext)
+    const { restaurants } = useContext(GetRestaurantsContext)
 
     const currentRestaurant = restaurants.find((restaurant) => restaurant.id === Number(id))
-    
-    if (id) {
-        if (parseInt(id) == 1 && currentRestaurant) {
-            return (
-                <TemplateProducts restaurant={currentRestaurant} />
-            )
-        } else if (parseInt(id) == 2 && currentRestaurant) {
-            return (
-                <TemplatePopeye restaurant={currentRestaurant} />
-            )
-        } else {
-            if (errorRequest) {
-                return <h1>Erro de Conexão com a API</h1>
-            } else {
-                if (currentRestaurant) {
-                    return <TemplatePopeye restaurant={currentRestaurant} />
-                } else {
-                    return <h1>Loading...</h1>
-                }
-            }
-        }
+
+    if (id && currentRestaurant) {
+        return <TemplateProducts restaurant={currentRestaurant} />
     } else {
         return <h1>Erro: Id não identificado</h1>
     }

@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { iGetProducts, iGetRestaurants } from "../../interfaces/Interfaces"
 import removeDuplicatesByNome from "../../utils/removeDuplicatesByNome"
-import { CartContext } from "../CartProvider"
+import { CartContext } from "../../context/CartProvider"
 import { DivContainsProductOnShoppingCart, DivProductOnShoppingCart, ImageCloseModal, ModalStyleShoppingCart, RemoveButton, TitleShoppingCart, TitleRestaurantShoppingCart, DivTotal, DivProducts, DivFinalShoppingCart, ButtonShoppingCart } from "../styled-components"
 
 const ModalShoppingCart: React.FC<{ onClose: () => void, products: iGetProducts[], restaurant: iGetRestaurants, onClick: () => void }> = (props) => {

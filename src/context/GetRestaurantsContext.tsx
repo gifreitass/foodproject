@@ -16,7 +16,7 @@ function GetRestaurantsProvider(props: any) {
 
 
     const getRestaurantsApi = async () => {
-        const response = await axios.get('https://apigenerator.dronahq.com/api/dstqgR3A/restaurantes')
+        const response = await axios.get('http://localhost:3000/restaurantes')
         setRestaurants(response.data)
     }
 

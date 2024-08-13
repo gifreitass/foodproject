@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { iGetProducts } from "../../interfaces/Interfaces"
-import { CartContext } from "../CartProvider"
+import { CartContext } from "../../context/CartProvider"
 import { DivAddProduct, DivImageProduct, DivPriceProduct, DivProductStyle, DivTextProduct, ImageAddProduct, ImageProduct, PriceAndStock } from "../styled-components"
 
 interface IPropsDivProducts extends iGetProducts {

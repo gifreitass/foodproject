@@ -1,4 +1,4 @@
-import { Image, NavBarStyle } from "../../allRestaurants/styled-components"
+import { Image, NavBarStyle } from "../styled-components"
 import { DivReturnRestaurants, LinkReturnRestaurant, TitleReturnRestaurants } from "../styled-components"
 import { Link } from "react-router-dom"
 

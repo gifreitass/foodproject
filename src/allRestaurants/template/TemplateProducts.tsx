@@ -3,13 +3,22 @@ import AllProducts from "../molecules/AllProducts"
 import NavBarMc from "../molecules/NavBarMc"
 import TitleRestaurant from "../molecules/TitleRestaurant"
 import axios from "axios"
-import { DivModalClient, DivModalShoppingCart, MainProducts } from "../styled-components"
 import { iGetProducts, iGetRestaurants } from "../../interfaces/Interfaces"
 import ModalShoppingCart from "../molecules/ModalShoppingCart"
-import { CartContext } from "../CartProvider"
+import { CartContext } from "../../context/CartProvider"
 import ModalClient from "../molecules/ModalClient"
 import removeDuplicatesByNome from "../../utils/removeDuplicatesByNome"
-import { Pedidos } from "../../popeye/template/TemplatePopeye"
+import { DivModalClient, DivModalShoppingCart, MainProducts } from "../styled-components"
+export interface Pedidos {
+    id?: string | number
+    idRestaurante?: number,
+    nome?: string,
+    valor?: number,
+    qtd?: number;
+    urlRestaurant?: string;
+    nomeRestaurant?: string;
+    descricao?: string,
+}
 
 const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     const [products, setProducts] = useState<iGetProducts[]>([])
@@ -24,7 +33,7 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
             return {
                 descricao: produto.descricao,
                 id: produto.id,
-                idRestaurante: produto.idRestaurante,
+                restauranteId: produto.restauranteId,
                 nome: produto.nome,
                 nomeRestaurant: props.restaurant.nome,
                 qtd: numberProduct(produto.nome),
@@ -36,7 +45,7 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     }, [productsCart])
 
     const getProductsApi = async () => {
-        const response = await axios.get('https://apigenerator.dronahq.com/api/3yNrDssc/produtos')
+        const response = await axios.get('http://localhost:3000/produtos')
         setProducts(response.data)
     }
 
@@ -57,7 +66,6 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     useEffect(() => {
         localStorage.setItem("products", JSON.stringify(productsCart))
     }, [productsCart])
-
 
     const handleClickProduct = (evt: React.MouseEvent<HTMLImageElement>) => {
         const copyProducts = [...products]

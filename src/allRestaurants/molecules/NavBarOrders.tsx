@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
-import { DivReturnRestaurants, LinkReturnRestaurant, TitleReturnRestaurants } from "../../mcDonalds/styled-components"
-import { Image, NavBarStyle } from "../styled-components"
+import { DivReturnRestaurants, Image, LinkReturnRestaurant, NavBarStyle, TitleReturnRestaurants } from "../styled-components"
 
 const NavBarOrders: React.FC = () => {
     return (
@@ -14,7 +13,7 @@ const NavBarOrders: React.FC = () => {
             </LinkReturnRestaurant>
                 <Link to='/pedidos'><Image src="https://cdn-icons-png.flaticon.com/512/2704/2704832.png" alt="ícone com visto indicando que está completo" /></Link>
         </NavBarStyle>
-    )
+    ) 
 }
 
 export default NavBarOrders

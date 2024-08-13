@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import TemplateOrders from "../allRestaurants/template/TemplateOrders"
-import { Pedidos } from "../popeye/template/TemplatePopeye"
+import { Pedidos } from "../allRestaurants/template/TemplateProducts"
 
 const PageOrders = () => {
     const [pedidos, setPedidos] = useState<Pedidos[]>([])

@@ -1,5 +1,5 @@
 export interface iGetProducts {
-    idRestaurante?: number,
+    restauranteId?: number,
     nome: string,
     url: string,
     valor: number,
