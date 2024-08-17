@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { useParams } from "react-router-dom"
 import { GetRestaurantsContext } from "../context/GetRestaurantsContext"
-import TemplateProducts from "../allRestaurants/template/TemplateProducts"
+import TemplateProducts from "../components/template/TemplateProducts"
 
 const PageProductsRestaurants: React.FC<{}> = () => {
     const { id } = useParams()

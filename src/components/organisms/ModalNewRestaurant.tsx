@@ -3,7 +3,7 @@ import axios from "axios"
 import * as Yup from 'yup';
 import { ModalStyle, ModalForm, ModalFormInputs, TitleModal, ModalInput, ModalTextArea, ModalLabel, ModalButton, ImageModal, DivFormik } from "../styled-components"
 
-const Modal: React.FC<{onClose: () => void}> = (props) => {
+const ModalNewRestaurant: React.FC<{onClose: () => void}> = (props) => {
 
     const formik = useFormik({
         initialValues: {
@@ -72,4 +72,4 @@ const Modal: React.FC<{onClose: () => void}> = (props) => {
     )
 }
 
-export default Modal
+export default ModalNewRestaurant

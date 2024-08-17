@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { iGetRestaurants } from "../../interfaces/Interfaces"
-import DivRestaurant from "../atoms/DivRestaurant"
+import DivRestaurant from "./DivRestaurant"
 import { DivContainsRestaurants, RestaurantsMainStyle } from "../styled-components"
 
 const Restaurants: React.FC<{ restaurants: iGetRestaurants[], findRestaurant: string, filterCategory: string }> = (props) => {

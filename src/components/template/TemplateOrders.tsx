@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import { Pedidos } from "../../popeye/template/TemplatePopeye"
-import NavBarOrders from "../molecules/NavBarOrders"
-import Pedido from "../molecules/Pedido"
+import NavBarOrders from "../organisms/NavBarOrders"
+import Pedido from "../organisms/Pedido"
+import { iPedidos } from "../../interfaces/Interfaces"
 
 const GridOrders = styled.div`
     display: grid;
@@ -20,7 +20,7 @@ const GridOrders = styled.div`
     }
 `
 
-const TemplateOrders: React.FC<{ pedidos: Array<Pedidos> }> = (props) => {
+const TemplateOrders: React.FC<{ pedidos: Array<iPedidos> }> = (props) => {
     return (
         <>
             <NavBarOrders />
@@ -28,7 +28,7 @@ const TemplateOrders: React.FC<{ pedidos: Array<Pedidos> }> = (props) => {
             <GridOrders>
                 {props.pedidos
                     ?
-                    props.pedidos.map((pedido: Pedidos, index) => {
+                    props.pedidos.map((pedido: iPedidos, index) => {
                         return <Pedido key={index} pedidos={pedido} />
                     })
                     :

@@ -164,7 +164,7 @@ export const ModalButton = styled.button`
     width: fit-content;
 `
 
-export const DivModal = styled.div`
+export const DivModalNewRestaurant = styled.div`
     position: absolute;
     width: 100%;
     height: 100vh;
@@ -418,5 +418,11 @@ export const DivModalClient = styled.div`
     height: 80vh;
     display: flex;
     justify-content: center;
+    align-items: center;
+`
+
+export const DivProductsHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 `

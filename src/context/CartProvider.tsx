@@ -1,6 +1,5 @@
-import { createContext, useEffect, useMemo, useState } from "react";
-import { iGetProducts } from "../interfaces/Interfaces";
-import { Pedidos } from "../allRestaurants/template/TemplateProducts";
+import { createContext, useMemo, useState } from "react";
+import { iGetProducts, iPedidos } from "../interfaces/Interfaces";
 
 interface ICartContext {
     productsCart: iGetProducts[],
@@ -8,7 +7,7 @@ interface ICartContext {
     numberProduct: (nameProduct: string) => number,
     removeProduct: (id: number) => void,
     totalCart: number,
-    createOrder: (pedido: Pedidos[]) => void
+    createOrder: (pedido: iPedidos[]) => void
 }
 
 export const CartContext = createContext<ICartContext>({ productsCart: [], setProductsCart: () => { }, numberProduct: () => 0, removeProduct: () => { }, totalCart: 0, createOrder: () => {} })
@@ -38,7 +37,7 @@ export default function CartProvider (props: any) {
         setProductsCart(copyProductsCart)
     }
 
-    function createOrder (pedido: Pedidos[]) {
+    function createOrder (pedido: iPedidos[]) {
         const pedidosStorage = localStorage.getItem("mcPedidos")
         const parsedPedidosStorage = JSON.parse(pedidosStorage || '[]')
         parsedPedidosStorage.push(pedido)

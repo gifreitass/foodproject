@@ -17,3 +17,15 @@ export interface iGetRestaurants {
     sobre: string,
     id: number | string,
 }
+
+export interface iPedidos {
+    id?: string | number
+    idRestaurante?: number,
+    nome?: string,
+    valor?: number,
+    qtd?: number;
+    urlRestaurant?: string;
+    nomeRestaurant?: string;
+    descricao?: string,
+}
+

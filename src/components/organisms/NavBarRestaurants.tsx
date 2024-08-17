@@ -2,7 +2,7 @@ import { Image, NavBarStyle } from "../styled-components"
 import { DivReturnRestaurants, LinkReturnRestaurant, TitleReturnRestaurants } from "../styled-components"
 import { Link } from "react-router-dom"
 
-const NavBarMc: React.FC<{onClick: () => void}> = (props) => {
+const NavBarRestaurants: React.FC<{onClick: () => void}> = (props) => {
     return (
         <NavBarStyle>
             <Link to='/'><Image src="https://cdn-icons-png.flaticon.com/512/562/562678.png" alt="logo com um prato e talheres" /></Link>
@@ -20,4 +20,4 @@ const NavBarMc: React.FC<{onClick: () => void}> = (props) => {
     )
 }
 
-export default NavBarMc
+export default NavBarRestaurants

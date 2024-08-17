@@ -30,7 +30,7 @@ const UnProduct = styled.span`
 
 const Pedido: React.FC<{ pedidos: any }> = (props) => {
     return (
-        <DivPedido  >
+        <DivPedido>
             <h3>Pedido</h3>
             <h5>{props.pedidos[0].nomeRestaurant}</h5>
             <img width={100} src={props.pedidos[0].urlRestaurant} alt="" />
@@ -43,7 +43,6 @@ const Pedido: React.FC<{ pedidos: any }> = (props) => {
                     )
                 })
             }
-
         </DivPedido>
     )
 }

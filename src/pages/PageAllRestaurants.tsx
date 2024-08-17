@@ -1,4 +1,4 @@
-import TemplateRestaurants from "../allRestaurants/template/TemplateRestaurants"
+import TemplateRestaurants from "../components/template/TemplateRestaurants"
 
 const PageAllRestaurants: React.FC<{}> = () => {
     return (

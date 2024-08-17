@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-import TemplateOrders from "../allRestaurants/template/TemplateOrders"
-import { Pedidos } from "../allRestaurants/template/TemplateProducts"
+import { iPedidos } from "../interfaces/Interfaces"
+import TemplateOrders from "../components/template/TemplateOrders"
 
 const PageOrders = () => {
-    const [pedidos, setPedidos] = useState<Pedidos[]>([])
+    const [pedidos, setPedidos] = useState<iPedidos[]>([])
 
-    const localData: Pedidos[] = JSON.parse(localStorage.getItem("pedidos") || '[]')
-    const giLocalData: Pedidos[] = JSON.parse(localStorage.getItem("mcPedidos") || '[]')
+    const localData: iPedidos[] = JSON.parse(localStorage.getItem("pedidos") || '[]')
+    const giLocalData: iPedidos[] = JSON.parse(localStorage.getItem("mcPedidos") || '[]')
     const mergedLocalData = [...localData, ...giLocalData]
 
     useEffect(() => {

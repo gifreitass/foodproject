@@ -1,35 +1,27 @@
 import { useContext, useEffect, useMemo, useState } from "react"
-import AllProducts from "../molecules/AllProducts"
-import NavBarMc from "../molecules/NavBarMc"
-import TitleRestaurant from "../molecules/TitleRestaurant"
+import AllProducts from "../organisms/AllProducts"
 import axios from "axios"
-import { iGetProducts, iGetRestaurants } from "../../interfaces/Interfaces"
-import ModalShoppingCart from "../molecules/ModalShoppingCart"
+import { iGetProducts, iGetRestaurants, iPedidos } from "../../interfaces/Interfaces"
+import ModalShoppingCart from "../organisms/ModalShoppingCart"
 import { CartContext } from "../../context/CartProvider"
-import ModalClient from "../molecules/ModalClient"
+import ModalClient from "../organisms/ModalClient"
 import removeDuplicatesByNome from "../../utils/removeDuplicatesByNome"
-import { DivModalClient, DivModalShoppingCart, MainProducts } from "../styled-components"
-export interface Pedidos {
-    id?: string | number
-    idRestaurante?: number,
-    nome?: string,
-    valor?: number,
-    qtd?: number;
-    urlRestaurant?: string;
-    nomeRestaurant?: string;
-    descricao?: string,
-}
+import { DivModalNewRestaurant, DivModalClient, DivModalShoppingCart, MainProducts } from "../styled-components"
+import NavBarRestaurants from "../organisms/NavBarRestaurants"
+import ProductsHeader from "../organisms/ProductsHeader"
+import Modal from "../organisms/ModalNewRestaurant"
 
 const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     const [products, setProducts] = useState<iGetProducts[]>([])
     const [isModalCartVisible, setModalCartVisible] = useState<boolean>(false)
     const [isModalClientVisible, setModalClientVisible] = useState<boolean>(false)
+    const [isModalProductVisible, setModalProductVisible] = useState<boolean>(false)
 
     const { setProductsCart, productsCart, createOrder, numberProduct } = useContext(CartContext)
 
     const adaptedOrder = useMemo(() => {
         let productsArray: iGetProducts[] = removeDuplicatesByNome(productsCart)
-        const adaptedArray: Pedidos[] = productsArray.map((produto) => {
+        const adaptedArray: iPedidos[] = productsArray.map((produto) => {
             return {
                 descricao: produto.descricao,
                 id: produto.id,
@@ -87,7 +79,7 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     return (
         <>
             <MainProducts>
-                <NavBarMc onClick={() => setModalCartVisible(true)} />
+                <NavBarRestaurants onClick={() => setModalCartVisible(true)} />
                 {isModalCartVisible ?
                     <DivModalShoppingCart>
                         <ModalShoppingCart onClick={() => setModalClientVisible(true)} restaurant={props.restaurant} products={products} onClose={() => setModalCartVisible(false)} />
@@ -98,7 +90,12 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
                         <ModalClient onClick={handleClickClient} onClose={() => setModalClientVisible(false)} />
                     </DivModalClient> : null
                 }
-                <TitleRestaurant restaurant={props.restaurant} />
+                {isModalProductVisible ?
+                    <DivModalNewRestaurant>
+                        <Modal onClose={() => setModalProductVisible(false)} />
+                    </DivModalNewRestaurant> : null
+                }
+                <ProductsHeader restaurant={props.restaurant} onClick={() => setModalProductVisible(true)} />
                 <AllProducts onClick={handleClickProduct} products={products} restaurant={props.restaurant} />
             </MainProducts>
         </>

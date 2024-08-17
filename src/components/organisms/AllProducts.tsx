@@ -1,9 +1,8 @@
 import { iGetProducts, iGetRestaurants } from "../../interfaces/Interfaces"
-import DivProducts from "../atoms/DivProduct"
+import DivProducts from "./DivProduct"
 import { AllProductsStyle, DivContainsAllProducts } from "../styled-components"
 
 const AllProducts: React.FC<{ products: iGetProducts[], onClick: (evt: React.MouseEvent<HTMLImageElement>) => void, restaurant: iGetRestaurants }> = (props) => {
-    console.log(props.products)
     return (
         <DivContainsAllProducts>
             <h1>Produtos</h1>
