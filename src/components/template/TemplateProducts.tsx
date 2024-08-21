@@ -9,7 +9,7 @@ import removeDuplicatesByNome from "../../utils/removeDuplicatesByNome"
 import { DivModalNewRestaurant, DivModalClient, DivModalShoppingCart, MainProducts } from "../styled-components"
 import NavBarRestaurants from "../organisms/NavBarRestaurants"
 import ProductsHeader from "../organisms/ProductsHeader"
-import Modal from "../organisms/ModalNewRestaurant"
+import ModalNewProduct from "../organisms/ModalNewProduct"
 
 const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     const [products, setProducts] = useState<iGetProducts[]>([])
@@ -92,7 +92,7 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
                 }
                 {isModalProductVisible ?
                     <DivModalNewRestaurant>
-                        <Modal onClose={() => setModalProductVisible(false)} />
+                        <ModalNewProduct restauranteId={props.restaurant.id} onClose={() => setModalProductVisible(false)} />
                     </DivModalNewRestaurant> : null
                 }
                 <ProductsHeader restaurant={props.restaurant} onClick={() => setModalProductVisible(true)} />
