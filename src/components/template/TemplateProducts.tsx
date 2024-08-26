@@ -92,7 +92,7 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
                 }
                 {isModalProductVisible ?
                     <DivModalNewRestaurant>
-                        <ModalNewProduct restauranteId={props.restaurant.id} onClose={() => setModalProductVisible(false)} />
+                        <ModalNewProduct setModalProductVisible={setModalProductVisible}  setProducts={setProducts} restauranteId={Number(props.restaurant.id)} onClose={() => setModalProductVisible(false)} />
                     </DivModalNewRestaurant> : null
                 }
                 <ProductsHeader restaurant={props.restaurant} onClick={() => setModalProductVisible(true)} />

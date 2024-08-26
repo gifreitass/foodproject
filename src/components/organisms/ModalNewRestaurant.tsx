@@ -2,8 +2,9 @@ import { useFormik } from "formik"
 import axios from "axios"
 import * as Yup from 'yup';
 import { ModalStyle, ModalForm, ModalFormInputs, TitleModal, ModalInput, ModalTextArea, ModalLabel, ModalButton, ImageModal, DivFormik } from "../styled-components"
+import { iGetRestaurants } from "../../interfaces/Interfaces";
 
-const ModalNewRestaurant: React.FC<{onClose: () => void}> = (props) => {
+const ModalNewRestaurant: React.FC<{onClose: () => void, setRestaurants: React.Dispatch<React.SetStateAction<iGetRestaurants[]>>, setModalVisible: React.Dispatch<React.SetStateAction<boolean>>}> = (props) => {
 
     const formik = useFormik({
         initialValues: {
@@ -31,14 +32,17 @@ const ModalNewRestaurant: React.FC<{onClose: () => void}> = (props) => {
                     .min(10, 'O campo de sobre precisa ter pelo menos 10 caracteres')
             }),
         onSubmit: async () => {
-            await axios.post('http://localhost:3000/restaurantes', {
+            const newRestaurant = {
                 url: formik.values.url,
                 nome: formik.values.nome,
                 categoria: formik.values.categoria,
                 avaliacao: Number(formik.values.avaliacao),
                 sobre: formik.values.sobre
-            })
+            }
+            await axios.post('http://localhost:3000/restaurantes', newRestaurant)
             formik.resetForm()
+            props.setRestaurants( restaurant =>  [...restaurant, newRestaurant])
+            props.setModalVisible(false)
         }
     })
 

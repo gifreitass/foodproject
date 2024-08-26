@@ -15,7 +15,7 @@ export interface iGetRestaurants {
     categoria: string,
     avaliacao: number,
     sobre: string,
-    id: number | string,
+    id?: number | string,
 }
 
 export interface iPedidos {

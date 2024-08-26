@@ -2,8 +2,9 @@ import axios from "axios";
 import { useFormik } from "formik"
 import * as Yup from 'yup';
 import { DivFormik, ImageModal, ModalButton, ModalForm, ModalFormInputs, ModalInput, ModalLabel, ModalStyle, ModalTextArea, TitleModal } from "../styled-components";
+import { iGetProducts } from "../../interfaces/Interfaces";
 
-const ModalNewProduct: React.FC<{ onClose: () => void, restauranteId: string | number }> = (props) => {
+const ModalNewProduct: React.FC<{ onClose: () => void, restauranteId: number, setProducts: React.Dispatch<React.SetStateAction<iGetProducts[]>>, setModalProductVisible: React.Dispatch<React.SetStateAction<boolean>> }> = (props) => {
     const formik = useFormik({
         initialValues: {
             url: "",
@@ -27,8 +28,7 @@ const ModalNewProduct: React.FC<{ onClose: () => void, restauranteId: string | n
                     .required('Campo obrigatório')
             }),
         onSubmit: async () => {
-            console.log(formik.values.promocao)
-            await axios.post(`http://localhost:3000/produtos`, {
+            const newProduct = {
                 nome: formik.values.nome,
                 valor: Number(formik.values.valor),
                 promocao: formik.values.promocao,
@@ -36,8 +36,15 @@ const ModalNewProduct: React.FC<{ onClose: () => void, restauranteId: string | n
                 descricao: formik.values.descricao,
                 url: formik.values.url,
                 restauranteId: Number(props.restauranteId)
-            })
-            formik.resetForm()
+            }
+            try {
+                await axios.post(`http://localhost:3000/produtos`, newProduct)
+                formik.resetForm()
+                props.setProducts( product => [...product, newProduct])
+                props.setModalProductVisible(false)
+            } catch (error) {
+                alert('Erro ao cadastrar produto, tente novamente preenchendo todos os campos necessários')
+            }
         }
     })
 
@@ -54,9 +61,10 @@ const ModalNewProduct: React.FC<{ onClose: () => void, restauranteId: string | n
                     <ModalInput type="text" id="valor" onChange={formik.handleChange} value={formik.values.valor} />
                     {formik.errors.valor && (<DivFormik>{formik.errors.valor}</DivFormik>)}
                     <ModalLabel htmlFor="promocao">Está em promoção (Sim ou não)?</ModalLabel>
-                    <select name="promocao">
-                        <option onChange={formik.handleChange} value={formik.values.promocao}>Sim</option>
-                        <option onChange={formik.handleChange} value={formik.values.promocao}>Não</option>
+                    <select value={formik.values.promocao} name="promocao" onChange={formik.handleChange}>
+                        <option value='' label="Escolha uma opção">Escolha uma opção</option>
+                        <option value='true' label="Sim">Sim</option>
+                        <option value='false' label="Não">Não</option>
                     </select>
                     {formik.errors.promocao && (<DivFormik>{formik.errors.promocao}</DivFormik>)}
                     <ModalLabel htmlFor="valorPromocional">Valor promocional (se houver):</ModalLabel>

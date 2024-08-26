@@ -37,7 +37,7 @@ const TemplateRestaurants: React.FC = () => {
         <>
             {isModalVisible ?
                 <DivModalNewRestaurant>
-                    <ModalNewRestaurant onClose={() => setModalVisible(false)} />
+                    <ModalNewRestaurant setRestaurants={setRestaurants} setModalVisible={setModalVisible} onClose={() => setModalVisible(false)} />
                 </DivModalNewRestaurant> : null
             }
             <NavBarHome findRestaurant={findRestaurant} setFindRestaurant={setFindRestaurant} onClick={() => setModalVisible(true)} />
