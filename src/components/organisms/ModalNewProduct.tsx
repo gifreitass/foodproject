@@ -22,8 +22,10 @@ const ModalNewProduct: React.FC<{ onClose: () => void, restauranteId: number, se
                 url: Yup.string()
                     .required('Campo obrigatório'),
                 valor: Yup.number()
+                    .typeError('O campo precisa ser preenchido com um número, se quiser preencher um número decimal, utilize o ponto')
                     .required('Campo obrigatório'),
-                valorPromocional: Yup.number(),
+                valorPromocional: Yup.number()
+                    .typeError('O campo precisa ser preenchido com um número, se quiser preencher um número decimal, utilize o ponto'),
                 descricao: Yup.string()
                     .required('Campo obrigatório')
             }),
@@ -38,9 +40,9 @@ const ModalNewProduct: React.FC<{ onClose: () => void, restauranteId: number, se
                 restauranteId: Number(props.restauranteId)
             }
             try {
-                await axios.post(`http://localhost:3000/produtos`, newProduct)
+                await axios.post(`https://foodproject-api.vercel.app/produtos`, newProduct)
                 formik.resetForm()
-                props.setProducts( product => [...product, newProduct])
+                props.setProducts(product => [...product, newProduct])
                 props.setModalProductVisible(false)
             } catch (error) {
                 alert('Erro ao cadastrar produto, tente novamente preenchendo todos os campos necessários')

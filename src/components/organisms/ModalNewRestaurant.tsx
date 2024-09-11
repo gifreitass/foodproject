@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { ModalStyle, ModalForm, ModalFormInputs, TitleModal, ModalInput, ModalTextArea, ModalLabel, ModalButton, ImageModal, DivFormik } from "../styled-components"
 import { iGetRestaurants } from "../../interfaces/Interfaces";
 
-const ModalNewRestaurant: React.FC<{onClose: () => void, setRestaurants: React.Dispatch<React.SetStateAction<iGetRestaurants[]>>, setModalVisible: React.Dispatch<React.SetStateAction<boolean>>}> = (props) => {
+const ModalNewRestaurant: React.FC<{ onClose: () => void, setRestaurants: React.Dispatch<React.SetStateAction<iGetRestaurants[]>>, setModalVisible: React.Dispatch<React.SetStateAction<boolean>> }> = (props) => {
 
     const formik = useFormik({
         initialValues: {
@@ -14,7 +14,7 @@ const ModalNewRestaurant: React.FC<{onClose: () => void, setRestaurants: React.D
             avaliacao: "",
             sobre: ""
         },
-        validationSchema: 
+        validationSchema:
             Yup.object().shape({
                 nome: Yup.string()
                     .required('Campo obrigatório')
@@ -39,10 +39,15 @@ const ModalNewRestaurant: React.FC<{onClose: () => void, setRestaurants: React.D
                 avaliacao: Number(formik.values.avaliacao),
                 sobre: formik.values.sobre
             }
-            await axios.post('http://localhost:3000/restaurantes', newRestaurant)
-            formik.resetForm()
-            props.setRestaurants( restaurant =>  [...restaurant, newRestaurant])
-            props.setModalVisible(false)
+            try {
+                await axios.post('https://foodproject-api.vercel.app/restaurantes', newRestaurant)
+                formik.resetForm()
+                props.setRestaurants(restaurant => [...restaurant, newRestaurant])
+                props.setModalVisible(false)
+            } catch (error) {
+                console.log(error)
+                alert('Erro ao cadastrar restaurante, tente novamente preenchendo todos os campos necessários')
+            }
         }
     })
 

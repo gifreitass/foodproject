@@ -37,7 +37,7 @@ const TemplateProducts: React.FC<{ restaurant: iGetRestaurants }> = (props) => {
     }, [productsCart])
 
     const getProductsApi = async () => {
-        const response = await axios.get('http://localhost:3000/produtos')
+        const response = await axios.get('https://foodproject-api.vercel.app/produtos')
         setProducts(response.data)
     }
 

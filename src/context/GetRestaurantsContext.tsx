@@ -16,7 +16,7 @@ function GetRestaurantsProvider(props: any) {
 
 
     const getRestaurantsApi = async () => {
-        const response = await axios.get('http://localhost:3000/restaurantes')
+        const response = await axios.get('https://foodproject-api.vercel.app/restaurantes')
         setRestaurants(response.data)
     }
 

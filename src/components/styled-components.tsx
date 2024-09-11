@@ -214,6 +214,7 @@ export const ImageAddProduct = styled.img`
 export const DivProductStyle = styled.div`
     background-color: white;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     text-align: left;
     border-radius: 10px;
